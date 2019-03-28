@@ -1,2 +1,3 @@
-# bodas
-Sistema de seguimientos a bodas Signature Events
+# dms
+Desarrollado por Mario Lopez ENAFOP
+Desarrollado por Mario Lopez ENAFOP
