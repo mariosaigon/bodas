@@ -179,7 +179,7 @@ $(document).ready( function() {
 	<div class="row">
     <!-- /.col -->
     <div class="">
-      <button type="submit" class="btn btn-primary btn-block btn-flat"><?php echo "Entrar" ?></button>
+      <button type="submit" class="btn btn-primary btn-block btn-flat"><?php echo "Entrardas" ?></button>
     </div>
     <!-- /.col -->
   </div>
