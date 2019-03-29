@@ -136,7 +136,7 @@ $(document).ready( function() {
 		}
 ?>
 <h2>¡Bienvenido de nuevo a la plataforma de seguimiento integral de tu evento!</h2>
-		<label for="login">Ingresa el !!! 6:</label>
+		<label for="login">Ingresa el !!! 7:</label>
 		<div class="form-group has-feedback">
 			<input class="form-control" type="text" id="login" name="login" placeholder="login" autocomplete="off" required>
 			<span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -179,7 +179,7 @@ $(document).ready( function() {
 	<div class="row">
     <!-- /.col -->
     <div class="">
-      <button type="submit" class="btn btn-primary btn-block btn-flat"><?php echo "Entrardas" ?></button>
+      <button type="submit" class="btn btn-primary btn-block btn-flat"><?php echo "Entrar" ?></button>
     </div>
     <!-- /.col -->
   </div>
