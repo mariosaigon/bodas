@@ -136,7 +136,7 @@ $(document).ready( function() {
 		}
 ?>
 <h2>¡Bienvenido de nuevo a la plataforma de seguimiento integral de tu evento!</h2>
-		<label for="login">Ingresa el usuario asignado dada A VER SI YA por Signature Events:</label>
+		<label for="login">Ingresa el usuario asignado dada A VER SI YA por SAGUANAAAignature Events:</label>
 		<div class="form-group has-feedback">
 			<input class="form-control" type="text" id="login" name="login" placeholder="login" autocomplete="off" required>
 			<span class="glyphicon glyphicon-user form-control-feedback"></span>
