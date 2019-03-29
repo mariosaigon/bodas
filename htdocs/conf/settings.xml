@@ -47,7 +47,7 @@
        - logFileEnable: set false to disable log system
        - logFileRotation: the log file rotation (h=hourly, d=daily, m=monthly)
     -->
-    <server rootDir="/home/mario/proyectos/bodas/htdocs/" httpRoot="/eventos/" contentDir="/home/mario/proyectos/bodas/htdocs/data/" stagingDir="/home/mario/proyectos/bodas/htdocs/data/lucene/" logFileEnable="true" logFileRotation="d" enableLargeFileUpload="true" partitionSize="9000000" dropFolderDir="" cacheDir="/home/mario/proyectos/bodas/htdocs/data/cache/" luceneDir="">
+    <server rootDir="/home/mario/proyectos/bodas/htdocs/" httpRoot="/tuevento/" contentDir="/home/mario/proyectos/bodas/htdocs/data/" stagingDir="/home/mario/proyectos/bodas/htdocs/data/lucene/" logFileEnable="true" logFileRotation="d" enableLargeFileUpload="true" partitionSize="9000000" dropFolderDir="" cacheDir="/home/mario/proyectos/bodas/htdocs/data/cache/" luceneDir="">
     </server>
     
     <!-- enableGuestLogin: If you want anybody to login as guest, set the following line to true
