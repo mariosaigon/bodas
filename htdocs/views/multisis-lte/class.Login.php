@@ -136,7 +136,7 @@ $(document).ready( function() {
 		}
 ?>
 <h2>¡Bienvenido de nuevo a la plataforma de seguimiento integral de tu evento!</h2>
-		<label for="login">Ingresa el !!! 7:</label>
+		<label for="login">Ingresa usuario asignado por Signature Events:</label>
 		<div class="form-group has-feedback">
 			<input class="form-control" type="text" id="login" name="login" placeholder="login" autocomplete="off" required>
 			<span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -190,7 +190,7 @@ $(document).ready( function() {
 		if ($enableguestlogin)
 			$tmpfoot[] = "<a href=\"\" id=\"guestlogin\">" . getMLText("guest_login") . "</a>\n";
 		if ($enablepasswordforgotten)
-			$tmpfoot[] = "<a href=\"../out/out.PasswordForgotten.php\">" . "¿Ha olvidado su contraseña? haga clic aquí" . "</a>\n";
+			$tmpfoot[] = "<a href=\"../out/out.PasswordForgotten.php\">" . "¿Has olvidado tu contraseña? haz clic aquí" . "</a>\n";
 		if($tmpfoot) {
 			print "<div class=\"row\"><div class=\"col-md-12 guest-access\"><div class=\"\">";
 			print implode(' | ', $tmpfoot);
