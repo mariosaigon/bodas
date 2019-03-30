@@ -98,7 +98,7 @@ return  $newDate;
 		$res1 = $db->getResultArray($consultar);
 		return $res1[0]['COUNT(*)'];
 	 }
-class SeedDMS_View_VerHitos extends SeedDMS_Bootstrap_Style 
+class SeedDMS_View_VerProveedores extends SeedDMS_Bootstrap_Style 
 {
  /**
  Método que muestra los documentos próximos a caducar sólo de 

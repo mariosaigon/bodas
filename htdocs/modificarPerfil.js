@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////////// 
+ ///////////////////////////////////////////////////////////////////////////////////// 
 $( document ).ready(function() 
 {
 $.fn.datepicker.defaults.autoclose = true;
@@ -7,7 +7,7 @@ $.fn.editable.defaults.mode = 'inline';
 var currentTime = new Date();
 var anoActual = currentTime.getFullYear();
 
-	$('[id^="nombre"]').editable({
+	$('[id="nombre_hito"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};
 			data['pk'] = params.pk;
@@ -16,7 +16,7 @@ var anoActual = currentTime.getFullYear();
 			return data;
 		  }
         });
-	$('[id^="descripcion"]').editable({
+	$('[id="estado"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};
 			data['pk'] = params.pk;
@@ -25,7 +25,16 @@ var anoActual = currentTime.getFullYear();
 			return data;
 		  }
         });
-	$('[id^="empresa"]').editable({
+	$('[id="deadline"]').editable({
+        format: 'YYYY-MM-DD',
+		viewformat: 'YYYY.MM.DD',
+		  combodate: {
+			minYear: 2019,
+			maxYear: 2030,
+			}
+        });
+
+	$('[id="comentario"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};
 			data['pk'] = params.pk;
@@ -35,7 +44,7 @@ var anoActual = currentTime.getFullYear();
 		  }
         });
 
-	$('[id^="costo"]').editable({
+	$('[id="link_anexos"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};
 			data['pk'] = params.pk;
@@ -45,7 +54,7 @@ var anoActual = currentTime.getFullYear();
 		  }
         });
 
-	$('[id^="costo_compra"]').editable({
+	$('[id^="lugar"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};
 			data['pk'] = params.pk;
@@ -55,17 +64,7 @@ var anoActual = currentTime.getFullYear();
 		  }
         });
 
-	$('[id^="origen_fondos"]').editable({
-			params: function(params) {  //params already contain `name`, `value` and `pk`
-			var data = {};
-			data['pk'] = params.pk;
-			data['name'] = params.name;
-			data['value'] = params.value;
-			return data;
-		  }
-        });
-
-	$('[id^="comentarios"]').editable({
+	$('[id^="cantidad_invitados"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};
 			data['pk'] = params.pk;
@@ -76,7 +75,7 @@ var anoActual = currentTime.getFullYear();
         });
 	///////////////EDITAR PROYECTO
 
-$('[id^="origen_fondos"]').editable({
+$('[id^="descripcion"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};
 			data['pk'] = params.pk;
@@ -85,50 +84,16 @@ $('[id^="origen_fondos"]').editable({
 			return data;
 		  }
         });
-$('[id^="codigo_setefe"]').editable({
-			params: function(params) {  //params already contain `name`, `value` and `pk`
-			var data = {};
-			data['pk'] = params.pk;
-			data['name'] = params.name;
-			data['value'] = params.value;
-			return data;
-		  }
-        });
-$('[id^="monto_total"]').editable({
-			params: function(params) {  //params already contain `name`, `value` and `pk`
-			var data = {};
-			data['pk'] = params.pk;
-			data['name'] = params.name;
-			data['value'] = params.value;
-			return data;
-		  }
-        });
-$('[id^="monto_bienes"]').editable({
-			params: function(params) {  //params already contain `name`, `value` and `pk`
-			var data = {};
-			data['pk'] = params.pk;
-			data['name'] = params.name;
-			data['value'] = params.value;
-			return data;
-		  }
-        });
-$('[id^="monto_materiales"]').editable({
-			params: function(params) {  //params already contain `name`, `value` and `pk`
-			var data = {};
-			data['pk'] = params.pk;
-			data['name'] = params.name;
-			data['value'] = params.value;
-			return data;
-		  }
-        });
-	$('[id^="fecha_finalizacion"]').editable({
+
+$('[id="fecha"]').editable({
         format: 'YYYY-MM-DD',
-		viewformat: 'DD.MM.YYYY',
+		viewformat: 'YYYY.MM.DD',
 		  combodate: {
 			minYear: 2019,
 			maxYear: 2030,
 			}
         });
+
 
 
 	///////////////// FIN EDITAR PROYECTO

@@ -107,21 +107,23 @@ class SeedDMS_View_VerEvento extends SeedDMS_Bootstrap_Style
 		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
 
 		$this->htmlStartPage("Ver detalle de artículo", "skin-blue sidebar-mini  sidebar-collapse");
+   
 		$this->containerStart();
+
 		$this->mainHeader();
+
 		$this->mainSideBar();
 		//$this->contentContainerStart("hoa");
 		$this->contentStart();
-		$consultar = "SELECT * FROM app_item where id=$idEvento;";
+		$consultar = "SELECT * FROM eventos where id=$idEvento;";
     //echo "consultar: ".$consultar;
         $res1 = $db->getResultArray($consultar);
           
 		?>
     <ol class="breadcrumb">
         <li><a href="out.ViewFolder.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="out.GestionarItems.php"> Gestionar items</a></li>
-        <li><a href="out.VerItems.php"> Ver la lista de items</a></li>
-        <li class="active">Ver datos de item</li>
+        <li><a href="out.VerItems.php"> Experiencia Signature Events</a></li>
+        <?php  echo "<li class=\"active\">Tracking - ". $res1[0]['nombre']."</li>"; ?>
       </ol>
     <div class="gap-10"></div>
     <div class="row">
@@ -131,187 +133,152 @@ class SeedDMS_View_VerEvento extends SeedDMS_Bootstrap_Style
     <?php
     //en este bloque php va "mi" código
   
-  $this->startBoxPrimary("Viendo información del artículo "."<b>".$res1[0]['nombre']."</b>");
+  $this->startBoxPrimary("Viendo información del evento "."<b>".$res1[0]['nombre']."</b>");
 $this->contentContainerStart();
 //////INICIO MI CODIGO
 ?>
-<div class="alert alert-info alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-info"></i> En esta pantalla puede ver el estado del item</h4>
-               Incluyendo cuántos quedan e información general.
-                <br>
+  <?php  
+  $fechaEvento=$res1[0]['fecha'];
+  $idItem=$res1[0]['id'];
+  echo "Solo administradores del sistema: hacer clic en cada elemento en azul para editarlo.<br>";
+
+  //echo "<p id=\"fechaEvento\">$fechaEvento</p>"; ?>
+<div class="row">
+
+  <div class="col-md-6">
+
+    <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"><h3>Mi evento</h3></span>
+
+               <p>Lugar:<span class="info-box-number">
+                <?php 
+                if($user->isAdmin())
+                {
+
+                  echo "<td><a href=\"#\" id=\"lugar\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"../modificarEvento.php\" data-title=\"nombre\">".$res1[0]['nombre']."</a></td>";
+                }
+
+                else
+                {
+                  echo $res1[$cont]['nombre'];
+                } 
+
+                ?>
+                 
+
+               </span></p>
+
+               <p>Lugar:<span class="info-box-number">
+                <?php 
+                if($user->isAdmin())
+                {
+
+                  echo "<td><a href=\"#\" id=\"lugar\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"../modificarEvento.php\" data-title=\"Lugar\">".$res1[0]['lugar']."</a></td>";
+                }
+
+                else
+                {
+                  echo $res1[$cont]['lugar'];
+                } 
+
+                ?>
+                 
+
+               </span></p>
+                <p>Cantidad de invitados:<span class="info-box-number">
+                  
+                   <?php 
+                if($user->isAdmin())
+                {
+
+                  echo "<td><a href=\"#\" id=\"cantidad_invitados\" data-step=\"1\" data-type=\"number\" data-pk=\"$idItem\" data-url=\"../modificarEvento.php\" data-title=\"cantidad_invitados\">".$res1[0]['cantidad_invitados']."</a></td>";
+                }
+
+                else
+                {
+                  echo $res1[$cont]['cantidad_invitados'];
+                } 
+
+                ?>
+
+                </span></p>
+
+              <p>Un poco sobre mi evento:<span class="info-box-number">
+                <?php 
+                if($user->isAdmin())
+                {
+
+                  echo "<td><a href=\"#\" id=\"descripcion\"  data-type=\"text\" data-pk=\"$idItem\" data-url=\"../modificarEvento.php\" data-title=\"descripcion\">".$res1[0]['descripcion']."</a></td>";
+                }
+
+                else
+                {
+                  echo $res1[$cont]['descripcion'];
+                } 
+
+                ?>
+              </span></p>
+
+              <p>Fecha:<span class="info-box-number">
+                <?php 
+                if($user->isAdmin())
+                {
+
+                  echo "<td><a href=\"#\" id=\"fecha\"  data-type=\"combodate\" data-pk=\"$idItem\" data-url=\"../modificarEvento.php\" data-title=\"fecha\">".$res1[0]['fecha']."</a></td>";
+                }
+
+                else
+                {
+                  echo $res1[$cont]['fecha'];
+                } 
+
+                ?>
+              </span></p>
+            </div>
+            <!-- /.info-box-content -->
+    </div>
+
+  
+      
+  </div>
+
+
+  <div class="col-md-6">
+
+      <div class="small-box bg-green">
+            <div class="inner">
+              <p><?php echo "<b>Faltan...</b>";?> </p>
+              <div id="fechita" style="display: none;"><?php echo "$fechaEvento";?> </div>
+              <h3 id="demo" >53<sup style="font-size: 20px">%</sup></h3>
+
+             
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+
+          <div class="progress progress-sm active">
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                  <span class="sr-only">20% Complete</span>
+                </div>
               </div>
+
+  </div>
+
+
+</div>
+
 <?php
- //////FIN MI CODIGO                 
-$this->contentContainerEnd();
+
 
 ?>
-<div class="row">
-	<div class="col-md-3">
-		<div class="info-box">
-            <span class="info-box-icon bg-black"><i class="fa fa-tags"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">De este artículo quedan:</span>
-              <span class="info-box-number"><?php 
-              print dameExistencias($idItem, $dms);
-
-              ?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-
-                <div class="info-box">
-            <span class="info-box-icon bg-navy"><i class="fa  fa-map-o"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">En cuales ubicaciones está este artículo?:</span>
-              <span class="info-box-number"><?php 
-               dimeUbicaciones($idItem, $dms);
-
-              ?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-
-        </div>
-
-
-        <div class="col-md-6">
-          <!-- Custom Tabs -->
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Información</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Transacciones</a></li>
-              <li><a href="#tab_3" data-toggle="tab">Foto del artículo</a></li>
-
-              <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_1">
-              	            <div class="box-body no-padding">
-              <table id="tablaEventos" class="table table-hover table-striped table-condensed">
-              	<thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>descipción</th>
-                  <th>Empresa</th>
-                  <th>Costo unitario</th>
-                  <th>Costo de compra</th>
-                  <th>Origen de los fondos</th>
-                  <th>Cantidad inicial</th>                 
-                </tr>
-               </thead>
-               <tbody>
-                	<?php
-            
-                	//////////////// DIBUJO TABLA
-                	$consultar = "SELECT * FROM app_item WHERE id=$idItem;";
-					//echo "Consultar: ".$consultar;
-				  	$res1 = $db->getResultArray($consultar);
-                	
-                		echo ' <tr>';
-                		//1. nombre
-                    $idItem=$res1[0]['id'];
-                		 echo "<td><a href=\"#\" id=\"nombre\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"/modificarItemEditable.php\" data-title=\"Enter username\">".$res1[0]['nombre']."</a></td>";
-                		 //2. fecha de inicio a fin
-                		 echo "<td><a href=\"#\" id=\"descripcion\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"/modificarItemEditable.php\" data-title=\"Enter username\">".$res1[0]['descripcion']."</a></td>";
-                		  // 3. lugar
-                		  echo "<td><a href=\"#\" id=\"empresa\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"/modificarItemEditable.php\" data-title=\"Enter username\">".$res1[0]['empresa']."</a></td>";
-                      /////////////////////
-                		  echo "<td><a href=\"#\" id=\"costo\" data-type=\"number\"  step=\"any\" data-pk=\"$idItem\" data-url=\"/modificarItemEditable.php\" data-title=\"Enter username\">".$res1[0]['costo']."</a></td>";
-                      //////////////////////////////////
-                		  echo "<td><a href=\"#\" id=\"costo_compra\" data-type=\"number\" step=\"any\" data-pk=\"$idItem\" data-url=\"/modificarItemEditable.php\" data-title=\"Enter username\">".$res1[0]['costo_compra']."</a></td>";
-                      ///////////////////////
-                		  echo "<td><a href=\"#\" id=\"origen_fondos\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"/modificarItemEditable.php\" data-title=\"Enter username\">".$res1[0]['origen_fondos']."</a></td>";
-                		  // 4. enlace para editar
-                		 echo "<td>".$res1[0]['cantidad_inicial']."</td>";
-
-                     echo ' </tr>';		           
-                	                               
-                ?>
-            </tbody>
-              <tfoot>
-              </tfoot>
-                
-
-               
-              </table>
-            </div>
-            <!-- /.box-body -->
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_2">
-                <p>Las transacciones están ordenadas desde la más reciente</p>
-                <table id="tablaEventos" class="table table-hover table-striped table-condensed">
-                <thead>
-                <tr>
-                  <th>Fecha de la operación</th>
-                  <th>Persona que lo hizo</th>
-                  <th>Razón</th>
-                  <th>Cantidad de artículos tomados/puestos</th>
-                
-                </tr>
-               </thead>
-               <tbody>
-                                  <?php            
-                  //////////////// DIBUJO TABLA
-                  $consultar = "SELECT * FROM app_transaccion WHERE id_item=$idItem ORDER BY fecha DESC;";
-          //echo "Consultar: ".$consultar;
-            $res1 = $db->getResultArray($consultar);
-                  
-                    foreach ($res1 as $transa) 
-                    {
-                      echo ' <tr>';
-                    //1. fecha
-                    $idItem=$res1[0]['id_item'];
-                     echo "<td>".$transa['fecha']."</td>";
-                     
-                     //// 2 persona
-                     $idUsuario=$transa['id_usuario'];
-                     $usuario=$dms->getUser($idUsuario);
-                     $nombreUser=$usuario->getFullName();
-                     echo "<td>".$nombreUser."</td>";
-                     /// 3 razon
-                     echo "<td>".$transa['razon']."</td>";
-
-                     /// 4 cantidad
-                      echo "<td>".$transa['cantidad_variada']."</td>";
-
-                     //
-                       echo ' </tr>';                                                                 
-                    }//fin foreach transaccion
-                ?>
-                 </tbody>
-              <tfoot>
-              </tfoot>              
-              </table>
-                
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_3">
-
-                   <img <?php echo "src=\"/images/items/item".$idItem.".jpg\""?> alt="Foto del artículo" height="400" width="280">
-              </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- nav-tabs-custom -->
-        </div>
-        <!-- /.col -->
-
-        <div class="col-md-3">
-
-      
-
-        </div>
-        <!-- /.col -->
-
-      </div>
-      <!-- /.row  Y COMIENZA TIMELINE-->
 
       <?php
       if($user->isAdmin())
@@ -319,11 +286,29 @@ $this->contentContainerEnd();
         echo "Ver lista de hitos de este evento y editarlos:";
         echo "<a class=\"btn btn-app\" href=\"out.VerHitos.php?evento=$idEvento\">".'
                 <i class="fa fa-heart-o"></i> Lista de hitos de este evento
+              </a><br>';
+
+
+        echo "Ver lista de proveedores de este evento y editarlos:";
+        echo "<a class=\"btn btn-info\" href=\"out.VerProveedores.php?evento=$idEvento\">".'
+                <i class="fa fa-file"></i> Lista de hitos de este evento
               </a>';
 
       }
 //////////////////////////////////////////////// TIMELINE DE HITOS
-    $idPostulacion=getIdPostulacion($idpostulante,$db);
+
+
+echo '<div class="row">';
+
+
+
+      echo "<div class=\"col-md-6\">";
+
+       echo "</div>"; //FIN DE COL IZQUIERDA
+
+
+         echo "<div class=\"col-md-6\">";
+                //$idPostulacion=getIdPostulacion($idpostulante,$db);
     $inicial="SELECT deadline FROM hitos_eventos WHERE id_evento=$idEvento;";
     $res = $db->getResultArray($inicial);
     $fechaInicial=$res[0]['deadline']; 
@@ -331,12 +316,12 @@ $this->contentContainerEnd();
     $tempo=explode(" ", $fechaInicial);
     $datIni=$tempo[0];
     $horaIni=$tempo[1];
-    $consultar1="SELECT nombre_hito,estado,comentario FROM hitos_eventos WHERE id_evento=$idEvento ORDER BY deadline desc;";
+    $consultar1="SELECT deadline,nombre_hito,estado,comentario FROM hitos_eventos WHERE id_evento=$idEvento ORDER BY deadline desc;";
     //echo "consultar historial: ".$consultar1;
     $res1 = $db->getResultArray($consultar1); 
      echo '<div class="box box-info no-print collapsed-box">';
      echo '<div class="box-header with-border">';
-             echo "<h1> Línea del tiempo <small>del histórico del proceso de evaluación del postulante (click en la cruz para desplegar)</small> </h1>";
+             echo "<h1> Línea del tiempo <small>del de los hitos en la planificación de tu evento (click en la cruz para desplegar)</small> </h1>";
               echo '<div class="box-tools pull-right">';
                 echo '<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>';
                 echo '</button></div></div>';
@@ -348,17 +333,19 @@ echo '<ul class="timeline">';
     foreach($res1 as $linea)
     {
       
-           
+      $nameHito=$linea['nombre_hito'];     
       $comment=$linea['comentario'];
       $estado=$linea['estado'];
-      $fechaCompleta=$linea['fecha'];
+      $fechaCompleta=$linea['deadline'];
       //echo "Fecha completa: ".$fechaCompleta;
-      $temp=explode(" ", $fechaCompleta);
-      $dat=$temp[0];
-      $hora=$temp[1];
+      $temp=explode("-", $fechaCompleta);
+      $year=$temp[0]; //echo "dat: ".$dat;
+      $mes=$temp[1];
+      $dia=$temp[2];
+
       echo '<li class="time-label">';
         echo '<span class="bg-red">';
-            echo "$dat";
+            echo "$dia-$mes-$year";
         echo '</span>';
         echo '</li>';
        echo '<li>';
@@ -366,7 +353,7 @@ echo '<ul class="timeline">';
         echo '<div class="timeline-item">';
              echo "<span class=\"time\"><i class=\"fa fa-clock-o\"></i> $hora</span>";
 
-             echo "<h3 class=\"timeline-header\"><a href=\"#\">Estado</a> $estado</h3>";
+             echo "<h3 class=\"timeline-header\"><a href=\"#\"><b>$nameHito</b> | Estado:</a> $estado</h3>";
 
              echo '<div class="timeline-body">';
                 
@@ -380,39 +367,22 @@ echo '<ul class="timeline">';
     echo '</li>';
     }//fin de obtener de la bd desde el mas reciente eventos
     //al final, del todo, pongo la postulación inicial
-    echo '<li class="time-label">';
-        echo '<span class="bg-red">';
-            echo "$datIni";
-        echo '</span>';
-        echo '</li>';
-       echo '<li>';
-        echo '<i class="fa fa-envelope bg-blue"></i>';
-        echo '<div class="timeline-item">';
-             echo "<span class=\"time\"><i class=\"fa fa-clock-o\"></i> $horaIni </span>";
 
-             echo "<h3 class=\"timeline-header\"><a href=\"#\">Estado</a> Postulado</h3>";
-
-             echo '<div class="timeline-body">';
-                
-                 echo "Postulación inicial";
-             echo '</div>';
-
-             echo '<div class="timeline-footer">';
-                 
-             echo '</div>';
-         echo '</div>';
-         echo '</li>';
 
 echo '</ul>'; 
 echo '</div>'; //cierre del box body linea del tmepo
 echo '</div>'; //cierre del box  linea del tmepo
 
+       echo "</div>"; //FIN DE COL DRECHA
+
+
+
+    echo "</div>"; //FIN DE SEGUNDA ROW
+  
+ //////FIN MI CODIGO                 
+$this->contentContainerEnd();
       ?>
 
-      <a class="btn btn-app">
-                <span class="badge bg-red">531</span>
-                <i class="fa fa-heart-o"></i> Likes
-              </a>
 
  <!-- /.box-header -->
 
@@ -428,9 +398,12 @@ $this->endsBoxPrimary();
 		$this->mainFooter();		
 		$this->containerEnd();
 		//$this->contentContainerEnd();
-        echo '<script type="text/javascript" src="/styles/'.$this->theme.'/jquery-editable/js/jquery-editable-poshytip.min.js"></script>'."\n";
-    echo '<script type="text/javascript" src="/styles/'.$this->theme.'/poshytip-1.2/src/jquery.poshytip.min.js"></script>'."\n";
-    echo "<script type='text/javascript' src='/modificarPerfil.js'></script>";
+    echo "<script type='text/javascript' src='../modificarPerfil.js'></script>";
+        echo '<script type="text/javascript" src="../styles/'.$this->theme.'/jquery-editable/js/jquery-editable-poshytip.min.js"></script>'."\n";
+    echo '<script type="text/javascript" src="../styles/'.$this->theme.'/poshytip-1.2/src/jquery.poshytip.min.js"></script>'."\n";
+    //echo "<script type='text/javascript' src='../modificarPerfil.js'></script>";
+      echo "<script type='text/javascript' src='../contador.js'></script>";
+   
 		$this->htmlEndPage();
 	} /* }}} */
 }

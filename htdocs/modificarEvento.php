@@ -40,7 +40,7 @@ $manejador=new SeedDMS_Core_DatabaseAccess($driver,$host,$user,$pass,$base);
 	exit;
   } 
 
-  $modificar="UPDATE app_proyecto SET $name = '$value' WHERE id=$pk;";
+  $modificar="UPDATE eventos SET $name = '$value' WHERE id=$pk;";
 		  //echo "mi query modificargrado: ".$modificar;
 		  $resultado1=$manejador->getResult($modificar);
 		  if(!$resultado1)
