@@ -143,8 +143,8 @@ class SeedDMS_View_MyAccount extends SeedDMS_Bootstrap_Style {
 
 		?>
 		<div class="box-footer">
-			<a href="/out/out.EditUserData.php" type="button" class="btn btn-success"><i class="fa fa-pencil"></i> <?php printMLText("edit_user_details"); ?></a>
-			<a href="/out/out.EditUserPassword.php" type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> <?php printMLText("change_password"); ?></a>
+			<a href="out.EditUserData.php" type="button" class="btn btn-success"><i class="fa fa-pencil"></i> <?php printMLText("edit_user_details"); ?></a>
+			<a href="out.EditUserPassword.php" type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> <?php printMLText("change_password"); ?></a>
 		</div>
 		<?php $this->endsBoxPrimary(); ?>
 

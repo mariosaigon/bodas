@@ -339,6 +339,7 @@ $(document).ready(function(){
 
 	function show() { /* {{{ */
 		$dms = $this->params['dms'];
+		$db = $dms->getDB();
 		$user = $this->params['user'];
 		$folder = $this->params['folder'];
 		$orderby = $this->params['orderby'];
@@ -360,26 +361,18 @@ $(document).ready(function(){
 		$this->htmlAddHeader('<script type="text/javascript" src="../styles/'.$this->theme.'/validate/jquery.validate.js"></script>'."\n", 'js');
 		
 		echo $this->callHook('startPage');
-		$this->htmlStartPage("Gestor de eventos de la ENAFOP", "skin-blue sidebar-mini sidebar-collapse");
+		$this->htmlStartPage("Gestor de eventos de Signature Events", "skin-blue sidebar-mini sidebar-collapse");
 		$this->containerStart();
 
 		$this->mainHeader();
 		$this->mainSideBar($folder->getID(),0,0);
 		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
-		    /////aprovecho de calcular cuantos items fueron entregados en cada mes.
-		$añoActual=date("Y");
-              $itemsJunio=contarItems("$añoActual-06-01","$añoActual-06-30");
-              $itemsJulio=contarItems("$añoActual-07-01","$añoActual-07-31");
-              $itemsAgosto=contarItems("$añoActual-08-01","$añoActual-08-31");
-              $itemsSeptiembre=contarItems("$añoActual-09-01","$añoActual-09-30");
-              $itemsOctubre=contarItems("$añoActual-10-01","$añoActual-10-31"); 
-              $itemsNoviembre=contarItems("$añoActual-11-01","$añoActual-11-30");
-              $itemsDiciembre=contarItems("$añoActual-12-01","$añoActual-12-31");
+
 		//echo $this->callHook('preContent');
 		$this->contentStart();		
 		echo $this->getFolderPathHTML($folder);
 		echo "<div class=\"row\">";
-		echo "<h3>Bienvenid@ al sistema de gestión de inventario de ENAFOP!</h3>";
+		echo "<h3>Bienvenido al sistema de gestión de eventos de Signature Events!</h3>";
 
 		//// Add Folder ////
 		echo "<div class=\"col-md-12 div-hidden\" id=\"div-add-folder\">";
@@ -399,13 +392,6 @@ $(document).ready(function(){
             color: red;
         }
     </style>
-<input type="hidden" id="itemsJunio" value="<?php echo $itemsJunio ?>" />
-<input type="hidden" id="itemsJulio" value="<?php echo $itemsJulio ?>" />
-<input type="hidden" id="itemsAgosto" value="<?php echo $itemsAgosto ?>" />
-<input type="hidden" id="itemsSeptiembre" value="<?php echo $itemsSeptiembre ?>" />
-<input type="hidden" id="itemsOctubre" value="<?php echo $itemsOctubre ?>" />
-<input type="hidden" id="itemsNoviembre" value="<?php echo $itemsNoviembre ?>" />
-<input type="hidden" id="itemsDiciembre" value="<?php echo $itemsDiciembre ?>" />
 
     <?php
     echo "</div>";
@@ -433,155 +419,134 @@ $(document).ready(function(){
     echo "</div>";
 		echo "</div>";
 		//// Folder content ////
-	////////////// AQUI VA MI CONTENIDO DE ENAFOP		
+	////////////// AQUI VA MI CONTENIDO DE SIGNATURE		
 		?>
-		  <div class="row">
 
-        <!-- ./col -->
-         <div class="col-lg-3 col-xs-6">
 
-        </div>
 
-        <div class="col-lg-6 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>Ver y gestionar </h3>
+		<?php
+		
+		////////////////////////// INICIO VISTA DE ADMINISTRADORES
+		if($user->isAdmin())		
+		{
+			//crear
+		echo '<div class="row">'; //abro fila
+			echo '<div class="col-lg-6" >'; //media pagina abro
+			
+						echo '<div class="col-lg-12 col-xs-12">
+				          <div class="small-box bg-yellow">
+				            <div class="inner">
+				              <h3>Crear nuevo evento</h3>
 
-              <p>itemes del inventario</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-book"></i>
-            </div>
-            <a href="out.GestionarItems.php" class="small-box-footer">Acceder<i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
+				              <p> y llenar sus datos</p>
+				            </div>
+				            <div class="icon">
+				              <i class="fa fa-calendar"></i>
+				            </div>
+				            <a href="out.AnadirEvento.php" class="small-box-footer">Acceder<i class="fa fa-arrow-circle-right"></i></a>
+				          </div>
+				        </div>';
+				        //ver lista
+				        echo '<div class="col-lg-12 col-xs-12">
+				          <div class="small-box bg-blue">
+				            <div class="inner">
+				              <h3>Ver lista de eventos</h3>
 
-        <div class="col-lg-3 col-xs-6">
+				              <p> realizados y en curso</p>
+				            </div>
+				            <div class="icon">
+				              <i class="fa fa-list-alt"></i>
+				            </div>
+				            <a href="out.VerEventos.php" class="small-box-footer">Acceder<i class="fa fa-arrow-circle-right"></i></a>
+				          </div>
+				        </div>';
+					
 
-        </div>
+			echo '</div>'; //media pagina  cierro
 
-        <!-- ./col -->
-     
-      </div>
-      <!-- /.row -->
+        echo '<div class="col-lg-6" >'; //otra media pagina abro
 
-      <div class="row">
-      	 <div class="col-lg-3 col-xs-6">
-
-        </div>
-
-      	        <!-- ./col -->
-        <div class="col-lg-6 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>Registrar movimiento</h3>
-
-              <p> de inventario</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-hand-rock-o"></i>
-            </div>
-            <a href="out.RealizarTransaccion.php" class="small-box-footer">Acceder<i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-
-         <div class="col-lg-3 col-xs-6">
-
-         		  <div class="box">
+        ?>
+        	<div class="box">
             <div class="box-header">
-              <h3 class="box-title">Ver últimas transacciones</h3>
+              <h3 class="box-title">Últimos eventos conseguidos</h3>
             </div>
-            <div class="box-body">
-              <a  href="out.VerTransacciones.php"  class="btn btn-app">
-                <i class="fa fa-exchange"></i> Acceder
-              </a>
-
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-        </div>
-
-
-      </div>
-       <div class="row">
-      	 <div class="col-lg-3 col-xs-6">
-
-        </div>
-
-      	        <!-- ./col -->
-        <div class="col-lg-6 col-xs-6">
-          <!-- small box -->
-
-          <!-- /.info-box -->
-		<div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Cantidad de materiales entregados por ENAFOP año <?php  print $añoActual;
-              ?></h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-                <canvas id="lineChart" style="height:250px"></canvas>
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-
-
-        </div>
-
-         <div class="col-lg-3 col-xs-6">
-
-         	<div class="info-box">
-            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Dato de gastos</span>
-              <span class="info-box-text">Se ha gastado en artículos y materiales un total de </span>
-              <span class="info-box-number"><?php 
-          
-              //////
-              	$consultar = "SELECT SUM(costo_compra) FROM app_item";
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table id="tablaEventos" class="table table-hover table-striped table-condensed">
+              	<thead>
+                <tr>
+                  <th>Nombre de evento</th>
+                  <th>Fecha</th>
+                  <th>Lugar</th>
+                       
+                </tr>
+               </thead>
+               <tbody>
+                	<?php
+                	$numEventos=10;
+                	//////////////// DIBUJO TABLA
+                	$consultar = "SELECT * FROM eventos ORDER by fecha DESC ;";
 					//echo "Consultar: ".$consultar;
-              	$db = $dms->getDB();
 				  	$res1 = $db->getResultArray($consultar);
-				  	print '$USD ';
-				  	print $res1[0]['SUM(costo_compra)'];
+                	for($cont=0;$cont<$numEventos;$cont++)
+                	{
+                		echo ' <tr>';
+                		//1. nombre
+                    $idItem=$res1[$cont]['id'];
+                    $consultaNombre= "SELECT nombre FROM eventos WHERE id= $idItem;";
+                    $resName = $db->getResultArray($consultaNombre);
+                     $name=$resName[0]['nombre'];
+                     echo "<td>".$name."</td>";
+                   
+                    	 //2. fecha
+                        $fecha=$resName[0]['fecha'];
+                		 echo "<td>".$fecha."</td>";
+                		
+                     $lugar=$res1[$cont]['lugar'];
+                     // 3. lugar
+                		 echo "<td>". $lugar."</td>";
+                		  
+     
+                		  echo ' </tr>';
 
-              ?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-
-            <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Ver estadísticas completas</h3>
-            </div>
-            <div class="box-body">
-              <a  href="out.ElegirFechasEstadisticas.php"  class="btn btn-app">
-                <i class="fa fa-bar-chart"></i> Acceder
-              </a>
-
+		           
+                	}                                
+                ?>
+            </tbody>
+              <tfoot>
+              </tfoot>                               
+              </table>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-        </div>
-      </div>
+
+        <?php
+ 
+        	
+        echo '</div>'; //otra media pagina  cierro
+
+
+		echo '</div>'; //cierro fila
+
+		} //fin de si es admin
+
+
+		////////////////////////// INICIO VISTA DE UUSUARIOS FINALES
+		if(!$user->isAdmin())
+		{
+
+		} //fin de si es usuario
+		/////////////////////////////////////////7
+
+		?>
+
+
 
 
 <?php
+	////////////// FIN DE  DE SIGNATURE
 		echo "</div>\n"; // End of row
 		echo "</div>\n"; // End of container
 
@@ -591,7 +556,7 @@ $(document).ready(function(){
 		$this->mainFooter();		
 		$this->containerEnd();
 
-		echo "<script type='text/javascript' src='/formularioSubida.js'></script>";
+		//echo "<script type='text/javascript' src='/formularioSubida.js'></script>";
 		echo '<script src="../styles/multisis-lte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>';
 		echo '<script src="../styles/multisis-lte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>';
         echo '<script src="../styles/multisis-lte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>';
@@ -602,8 +567,8 @@ $(document).ready(function(){
         echo '<script src="../styles/multisis-lte/plugins/sorting/moment.min.js"></script>';
         echo '<script src="../styles/multisis-lte/plugins/sorting/datetime-moment.js"></script>';
         echo '<script src="../styles/multisis-lte/bower_components/jquery-knob/js/jquery.knob.js"></script>';
-		echo '<script src="../tablasDinamicas.js"></script>';
-		echo '<script src="../graficaInicial.js"></script>';
+		//echo '<script src="../tablasDinamicas.js"></script>';
+		//echo '<script src="../graficaInicial.js"></script>';
 
 		$this->htmlEndPage();
 	} /* }}} */
