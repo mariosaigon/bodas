@@ -44,7 +44,7 @@ require_once("SeedDMS/Preview.php");
  mostrarTodosDocumentos(lista_usuarios,dias)
  -dias: documentos que van a caducar dentro de cúantos días
  */
-function imprimirGrupos()
+function imprimirTipos()
 {
   //LOS DEPARTAMENTOS LEIDOS DE LA BD
   $settings = new Settings(); //acceder a parámetros de settings.xml con _antes
@@ -58,28 +58,24 @@ function imprimirGrupos()
   //echo "Conectado: ".$estado;
   if($estado!=1)
   {
-    echo "out.AnadePersona.php[]Error: no se pudo conectar a la BD";
+    echo "out.AnadirEvento.php[]Error: no se pudo conectar a la BD";
   } 
   //query de consulta:
-  $miQuery="SELECT nombre FROM app_grupo";
+  $miQuery="SELECT nombre,id FROM tipos_eventos;";
   //echo "mi query: ".$miQuery;
   $resultado=$manejador->getResultArray($miQuery);
   $arrayDepartamentos=$resultado[0]['nombre'];
   ////////////////////// EL SELECT
-  echo " <select class=\"form-control chzn-select\" id=\"nombreGrupo\" name=\"nombreGrupo\">";
-
-  echo "<option disabled selected value>Seleccione un grupo de la lista</option>";
+  echo ' <select class="form-control chzn-select"  name="tipo"  id="tipo"  data-placeholder="Selecciona una categoría de evento..."  required>';
+  echo "<option disabled  selected value>Selecciona una</option>";
   foreach ($resultado as $a) 
   {
-    foreach ($a as $valor) 
-    {
-       echo "<option value=\"".$valor."\">".$valor."</option>";
-    }
+       echo "<option value=\"".$a['id']."\">".$a['nombre']."</option>";
   }
 
   echo "</select>";
 }// fin de imprimir departamentos
-class SeedDMS_View_AnadeUbicacion extends SeedDMS_Bootstrap_Style 
+class SeedDMS_View_AnadirEvento extends SeedDMS_Bootstrap_Style 
 {
  /**
  Método que muestra los documentos próximos a caducar sólo de 
@@ -97,10 +93,11 @@ class SeedDMS_View_AnadeUbicacion extends SeedDMS_Bootstrap_Style
 		$previewwidth = $this->params['previewWidthList'];
 		$timeout = $this->params['timeout'];
 
+
 		$db = $dms->getDB();
 		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
 
-		$this->htmlStartPage("Añadir item ", "skin-blue sidebar-mini  sidebar-collapse");
+		$this->htmlStartPage("Añadiendo evento", "skin-blue sidebar-mini");
 		$this->containerStart();
 		$this->mainHeader();
 		$this->mainSideBar();
@@ -108,11 +105,6 @@ class SeedDMS_View_AnadeUbicacion extends SeedDMS_Bootstrap_Style
 		$this->contentStart();
           
 		?>
-    <ol class="breadcrumb">
-        <li><a href="/out/out.ViewFolder.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="/out/out.GestionarItems.php"> Gestionar items</a></li>
-        <li class="active">Añadir ubicación</li>
-      </ol>
     <div class="gap-10"></div>
     <div class="row">
     <div class="col-md-12">
@@ -121,49 +113,108 @@ class SeedDMS_View_AnadeUbicacion extends SeedDMS_Bootstrap_Style
     <?php
     //en este bloque php va "mi" código
   
- $this->startBoxPrimary("Añadir ubicación de almacenamiento nueva");
+ $this->startBoxPrimary("Datos básicos del evento");
 $this->contentContainerStart();
 //////INICIO MI CODIGO
 ?>
-<!-- ***************** UNA FILA TRES COLUMNAS *********************-->
 <div class="row">
         <div class="col-md-3">
+
         </div> <!-- FIN DE COLUMNA 1 -->
+
         <div class="col-md-6">
         		<div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Datos de la nueva ubicación</h3>
+              <h3 class="box-title">El inicio de una experiencia inolvidable...</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-      <form class="form-horizontal" name="formularioGrupo" id="formularioGrupo" action="../out/out.ProcesarUbicacion.php" method="POST" enctype="multipart/form-data">
+      <form class="form-horizontal" name="formularioGrupo" id="formularioGrupo" action="out.EventoAnadido.php" method="POST" enctype="multipart/form-data">
               <div class="box-body">
+
                 <div class="form-group">
-                  <label for="nombreItem" class="col-sm-2 control-label">Nombre de la ubicación</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nombreUbicacion" name="nombreUbicacion" placeholder="por ejemplo bodega 1   ..." required>
-                  </div>
-                </div>                          
-                 <div class="form-group">
-                  <label for="descripcion" class="col-sm-2 control-label">Descripción</label>
+                  <label for="nombre" class="col-sm-2 control-label">Nombre</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="por ejemplo armario que nos cedió..." required>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="por ejemplo Boda María y Pepe  ..." required>
+                  </div>
+                </div>
+                          
+                 <div class="form-group">
+                  <label for="descripcion" class="col-sm-2 control-label">Tipo</label>
+
+                  <div class="col-sm-10">
+                   <?php imprimirTipos(); ?>
                   </div>
                 </div> 
-              
-              </div><!-- /.box-body -->
+
+                <div class="form-group">
+                  <label for="descripcion" class="col-sm-2 control-label">Descripcion</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Breve resumen del evento  ..." required>
+                  </div>
+
+                </div> 
+
+                <div class="form-group">
+                  <label for="fecha" class="col-sm-2 control-label">Fecha</label>
+
+                  <div class="col-sm-10">
+                    <input type="date"  class="form-control" id="fecha" name="fecha" placeholder="Seleccionar de calendario  ..." required>
+                  </div>
+
+                </div> 
+
+                <div class="form-group">
+                  <label for="lugar" class="col-sm-2 control-label">Lugar</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="lugar" name="lugar" placeholder="Ubicación del evento  ..." required>
+                  </div>
+
+                </div> 
+
+
+                 <div class="form-group">
+                  <label for="cantidad" class="col-sm-2 control-label">Cantidad de invitados</label>
+
+                  <div class="col-sm-10">
+                    <input type="number" min="1" class="form-control" id="invitados" name="invitados" placeholder="Cantidad de invitados  ..." required>
+                  </div>
+
+                </div> 
+
+
+
+                </div> 
+
+
+
+
+
+
+              <!-- /.box-body -->
               <div class="box-footer">
                 <button type="reset" class="btn btn-default">Borrar campos</button>
-                <button type="submit" class="btn btn-info pull-right">Agregar ubicación</button>
+                <button type="submit" class="btn btn-info pull-right">Crear evento</button>
               </div>
               <!-- /.box-footer -->
             </form>
           </div>
+
+
+
+
         </div> <!-- FIN DE COLUMNA 2 -->
+
+
         <div class="col-md-3">
+
         </div> <!-- FIN DE COLUMNA 3 -->
 </div> <!-- FIN DE FILA -->
+
+
 <?php
  //////FIN MI CODIGO                 
 $this->contentContainerEnd();

@@ -44,8 +44,38 @@ require_once("SeedDMS/Preview.php");
  mostrarTodosDocumentos(lista_usuarios,dias)
  -dias: documentos que van a caducar dentro de cúantos días
  */
+function imprimirTipos()
+{
+  //LOS DEPARTAMENTOS LEIDOS DE LA BD
+  $settings = new Settings(); //acceder a parámetros de settings.xml con _antes
+    $driver=$settings->_dbDriver;
+    $host=$settings->_dbHostname;
+    $user=$settings->_dbUser;
+    $pass=$settings->_dbPass;
+    $base=$settings->_dbDatabase;
+  $manejador=new SeedDMS_Core_DatabaseAccess($driver,$host,$user,$pass,$base);
+  $estado=$manejador->connect();
+  //echo "Conectado: ".$estado;
+  if($estado!=1)
+  {
+    echo "out.AnadirEvento.php[]Error: no se pudo conectar a la BD";
+  } 
+  //query de consulta:
+  $miQuery="SELECT nombre,id FROM tipos_eventos;";
+  //echo "mi query: ".$miQuery;
+  $resultado=$manejador->getResultArray($miQuery);
+  $arrayDepartamentos=$resultado[0]['nombre'];
+  ////////////////////// EL SELECT
+  echo ' <select class="form-control chzn-select"  name="tipo"  id="tipo"  data-placeholder="Selecciona una categoría de evento..."  required>';
+  echo "<option disabled  selected value>Selecciona una</option>";
+  foreach ($resultado as $a) 
+  {
+       echo "<option value=\"".$a['id']."\">".$a['nombre']."</option>";
+  }
 
-class SeedDMS_View_AnadeEvento extends SeedDMS_Bootstrap_Style 
+  echo "</select>";
+}// fin de imprimir departamentos
+class SeedDMS_View_AnadirHito extends SeedDMS_Bootstrap_Style 
 {
  /**
  Método que muestra los documentos próximos a caducar sólo de 
@@ -63,10 +93,11 @@ class SeedDMS_View_AnadeEvento extends SeedDMS_Bootstrap_Style
 		$previewwidth = $this->params['previewWidthList'];
 		$timeout = $this->params['timeout'];
 
+
 		$db = $dms->getDB();
 		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
 
-		$this->htmlStartPage(getMLText("anadir_evento"), "skin-blue sidebar-mini  sidebar-collapse");
+		$this->htmlStartPage("Añadiendo evento", "skin-blue sidebar-mini");
 		$this->containerStart();
 		$this->mainHeader();
 		$this->mainSideBar();
@@ -82,11 +113,10 @@ class SeedDMS_View_AnadeEvento extends SeedDMS_Bootstrap_Style
     <?php
     //en este bloque php va "mi" código
   
- $this->startBoxPrimary(getMLText("anadir_evento"));
+ $this->startBoxPrimary("Datos básicos del evento");
 $this->contentContainerStart();
 //////INICIO MI CODIGO
 ?>
-<!-- ***************** UNA FILA TRES COLUMNAS *********************-->
 <div class="row">
         <div class="col-md-3">
 
@@ -95,73 +125,75 @@ $this->contentContainerStart();
         <div class="col-md-6">
         		<div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Datos del evento</h3>
+              <h3 class="box-title">El inicio de una experiencia inolvidable...</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-      <form class="form-horizontal" name="formularioEvento" id="formularioEvento" action="../out/out.ProcesarEvento.php" method="POST" enctype="multipart/form-data>
+      <form class="form-horizontal" name="formularioGrupo" id="formularioGrupo" action="out.EventoAnadido.php" method="POST" enctype="multipart/form-data">
               <div class="box-body">
 
                 <div class="form-group">
-                  <label for="nombreEvento" class="col-sm-2 control-label">Nombre del evento</label>
+                  <label for="nombre" class="col-sm-2 control-label">Nombre</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nombreEvento" name="nombreEvento" placeholder="Nombre del evento" required>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="por ejemplo Boda María y Pepe  ..." required>
                   </div>
                 </div>
-
-                <div class="form-group">
-                  <label for="lugarEvento" class="col-sm-2 control-label">Lugar</label>
+                          
+                 <div class="form-group">
+                  <label for="descripcion" class="col-sm-2 control-label">Tipo</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="lugarEvento" name="lugarEvento" placeholder="ej: Sheraton" required>
+                   <?php imprimirTipos(); ?>
                   </div>
-                </div>
+                </div> 
 
                 <div class="form-group">
-                  <label for="totalInvitados" class="col-sm-2 control-label">Total de invitados</label>
+                  <label for="descripcion" class="col-sm-2 control-label">Descripcion</label>
 
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="totalInvitados" name="totalInvitados" min="1"  placeholder="Número total de personas que se prevee asistirán" required>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Breve resumen del evento  ..." required>
                   </div>
-                </div>
+
+                </div> 
 
                 <div class="form-group">
-                	<label for="fechaInicio" class="col-sm-2 control-label">Fecha de inicio</label>
-                   <div class="col-xs-4"> <!-- *******INICIO PERIODO INICIAL****** -->
-                  	    	                   							
-						    <span class="input-append date datepicker" data-date="<?php echo date('Y-m-d'); ?>" data-date-format="yyyy-mm-dd" data-date-language="<?php echo str_replace('_', '-', $this->params['session']->getLanguage()); ?>">
-                              <input class="form-control" name="fechaInicio" id="fechaInicio" type="text" value="" required>
-                              <span class="add-on"><i class="icon-calendar"></i></span>
-                            </span>						              
-						             
-                     </div> <!-- *******FIN PERIODO INICIAL****** -->
-                </div>
+                  <label for="fecha" class="col-sm-2 control-label">Fecha</label>
+
+                  <div class="col-sm-10">
+                    <input type="date"  class="form-control" id="fecha" name="fecha" placeholder="Seleccionar de calendario  ..." required>
+                  </div>
+
+                </div> 
 
                 <div class="form-group">
-                  <label for="fechaFin" class="col-sm-2 control-label">Fecha de fin del evento</label>
+                  <label for="lugar" class="col-sm-2 control-label">Lugar</label>
 
-                  <div class="col-xs-4"> <!-- *******INICIO PERIODO INICIAL****** -->
-                  	    	                   							
-						    <span class="input-append date datepicker" data-date="<?php echo date('Y-m-d'); ?>" data-date-format="yyyy-mm-dd" data-date-language="<?php echo str_replace('_', '-', $this->params['session']->getLanguage()); ?>">
-                              <input class="form-control" name="fechaFin" id="fechaFin" type="text" value="" required>
-                              <span class="add-on"><i class="icon-calendar"></i></span>
-                            </span>						              
-						             
-                     </div> <!-- *******FIN PERIODO INICIAL****** -->
-                </div>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="lugar" name="lugar" placeholder="Ubicación del evento  ..." required>
+                  </div>
+
+                </div> 
+
 
                  <div class="form-group">
-                  <label for="comentarios" class="col-sm-2 control-label">Comentarios</label>
+                  <label for="cantidad" class="col-sm-2 control-label">Cantidad de invitados</label>
 
                   <div class="col-sm-10">
-                     <textarea class="form-control" id="comentarios" name="comentarios" rows="3" placeholder="Añada comentarios  ..."></textarea>
+                    <input type="number" min="1" class="form-control" id="invitados" name="invitados" placeholder="Cantidad de invitados  ..." required>
                   </div>
-              
 
-              
+                </div> 
 
-              </div>
+
+
+                </div> 
+
+
+
+
+
+
               <!-- /.box-body -->
               <div class="box-footer">
                 <button type="reset" class="btn btn-default">Borrar campos</button>
@@ -170,6 +202,9 @@ $this->contentContainerStart();
               <!-- /.box-footer -->
             </form>
           </div>
+
+
+
 
         </div> <!-- FIN DE COLUMNA 2 -->
 

@@ -49,11 +49,11 @@ require_once("SeedDMS/Preview.php");
 $newDate = date("d-m-Y", strtotime($fecha));
 return  $newDate;
 }
- function contarEventos($dms)
+ function contarHitos($dms)
 	 {
 	 	$res=true;
 		$db = $dms->getDB();
-		$consultar = "SELECT COUNT(*) FROM eventos;";
+		$consultar = "SELECT COUNT(*) FROM hitos_eventos;";
 		//echo "Consultar: ".$consultar;
 		$res1 = $db->getResultArray($consultar);
 		return $res1[0]['COUNT(*)'];
@@ -68,7 +68,7 @@ return  $newDate;
 		$res1 = $db->getResultArray($consultar);
 		return $res1[0]['COUNT(*)'];
 	 }
-class SeedDMS_View_VerEventos extends SeedDMS_Bootstrap_Style 
+class SeedDMS_View_VerHitos extends SeedDMS_Bootstrap_Style 
 {
  /**
  Método que muestra los documentos próximos a caducar sólo de 
@@ -85,11 +85,14 @@ class SeedDMS_View_VerEventos extends SeedDMS_Bootstrap_Style
 		$workflowmode = $this->params['workflowmode'];
 		$previewwidth = $this->params['previewWidthList'];
 		$timeout = $this->params['timeout'];
+    $idEvento = $this->params['idEvento'];
+    $nombreEvento = $this->params['nombreEvento'];
 
 		$db = $dms->getDB();
 		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
-
-		$this->htmlStartPage("Lista de items de ENAFOP", "skin-blue sidebar-mini  sidebar-collapse");
+    $consultar = "SELECT * FROM hitos_eventos;";
+      $res1 = $db->getResultArray($consultar);
+		$this->htmlStartPage("Lista de hitos del evento $nombreEvento", "skin-blue sidebar-mini  sidebar-collapse");
 		$this->containerStart();
 		$this->mainHeader();
 		$this->mainSideBar();
@@ -110,46 +113,50 @@ class SeedDMS_View_VerEventos extends SeedDMS_Bootstrap_Style
     <?php
     //en este bloque php va "mi" código
   
- $this->startBoxPrimary("Listado de artículos divulgativos e items ENAFOP");
+ $this->startBoxPrimary("Listado de hitos del evento <b>$nombreEvento</b>");
 $this->contentContainerStart();
 //////INICIO MI CODIGO
 ?>
+<button type="button" class="btn  btn-success btn-lg">Agregar nuevo hito</button>
  <div class="box">
+
             <div class="box-header">
-              <h3 class="box-title">Haga clic en el nombre del evento para ver el tracking</h3>
+              <h3 class="box-title">Haga clic en el nombre del elemento para editarlo</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <table id="tablaEventos" class="table table-hover table-striped table-condensed">
               	<thead>
                 <tr>
-                  <th>Nombre del evento</th>
-                  <th>descipción</th>
-                  <th>Fecha</th>
-                  <th>Lugar</th>           
+                  <th>Nombre del hito</th>
+                  <th>deadline</th>
+                  <th>Estado</th>
+                  <th>Comentario</th>
+                  <th>Link a carpeta con anexos</th>           
                 </tr>
                </thead>
                <tbody>
                 	<?php
                 	
                 	//////////////// DIBUJO TABLA
-                	$consultar = "SELECT * FROM eventos;";
-                	$numEventos=contarEventos($dms);
+
+                	$numEventos=contarHitos($dms);
 					//echo "Consultar: ".$consultar;
-				  	$res1 = $db->getResultArray($consultar);
+				  	
                 	for($cont=0;$cont<$numEventos;$cont++)
                 	{
                 		echo ' <tr>';
                 		//1. nombre
                     $idItem=$res1[$cont]['id'];
-                		 echo "<td><a href=\"out.VerEvento.php?id=".$idItem."\">".$res1[$cont]['nombre']."</a></td>";
+                		 echo "<td>".$res1[$cont]['nombre_hito']."</a></td>";
                 		 //2. fecha de inicio a fin
-                		 echo "<td>".$res1[$cont]['descripcion']."</td>";
+                		 echo "<td>".$res1[$cont]['deadline']."</td>";
                 		  // 3. lugar
-                		  echo "<td>".$res1[$cont]['fecha']."</td>";
+                		  echo "<td>".$res1[$cont]['estado']."</td>";
                 		  // 4. enlace para editar
+                      echo "<td>".$res1[$cont]['comentario']."</td>";
                 		  //$idEvento=$res1[$cont]['id'];
-                		 echo "<td>".$res1[$cont]['lugar']."</td>";
+                		 echo "<td>".$res1[$cont]['link_anexos']."</td>";
 
 		           
                 	}                                

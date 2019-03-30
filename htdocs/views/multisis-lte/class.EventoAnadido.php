@@ -45,7 +45,7 @@ require_once("SeedDMS/Preview.php");
  -dias: documentos que van a caducar dentro de cúantos días
  */
 
-class SeedDMS_View_AnadeGrupo extends SeedDMS_Bootstrap_Style 
+class SeedDMS_View_EventoAnadido extends SeedDMS_Bootstrap_Style 
 {
  /**
  Método que muestra los documentos próximos a caducar sólo de 
@@ -63,10 +63,14 @@ class SeedDMS_View_AnadeGrupo extends SeedDMS_Bootstrap_Style
 		$previewwidth = $this->params['previewWidthList'];
 		$timeout = $this->params['timeout'];
 
+		$nombre = $this->params['nombre'];
+		$fecha = $this->params['fecha'];
+		$lugar = $this->params['lugar'];
+
 		$db = $dms->getDB();
 		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
 
-		$this->htmlStartPage("Añadir grupo nuevo", "skin-blue sidebar-mini  sidebar-collapse");
+		$this->htmlStartPage(getMLText("mi_sitio"), "skin-blue sidebar-mini");
 		$this->containerStart();
 		$this->mainHeader();
 		$this->mainSideBar();
@@ -82,59 +86,35 @@ class SeedDMS_View_AnadeGrupo extends SeedDMS_Bootstrap_Style
     <?php
     //en este bloque php va "mi" código
   
- $this->startBoxPrimary("Añadir grupo nuevo");
+ $this->startBoxPrimary("Evento añadido exitosamente");
 $this->contentContainerStart();
 //////INICIO MI CODIGO
 ?>
-<!-- ***************** UNA FILA TRES COLUMNAS *********************-->
-<div class="row">
-        <div class="col-md-3">
-
-        </div> <!-- FIN DE COLUMNA 1 -->
-
-        <div class="col-md-6">
-        		<div class="box box-info">
+<div class="box box-default">
             <div class="box-header with-border">
-              <h3 class="box-title">Datos del grupo</h3>
+              <i class="fa fa-bullhorn"></i>
+
+              <h3 class="box-title">Evento añadido con éxito</h3>
             </div>
             <!-- /.box-header -->
-            <!-- form start -->
-      <form class="form-horizontal" name="formularioGrupo" id="formularioGrupo" action="../out/out.ProcesarGrupo.php" method="POST" enctype="multipart/form-data>
-              <div class="box-body">
+            <div class="box-body">
+            
+              <div class="callout callout-success">
+                <h4>Resumen del evento creado:</h4>
 
-                <div class="form-group">
-                  <label for="nombreEvento" class="col-sm-2 control-label">Nombre del grupo</label>
+				 <ul>
+				 	 <li><?php echo "Nombre: ".$nombre?></li>
+				   <li><?php echo "Fecha: ".$fecha?></li>
+				   <li><?php echo "Lugar: ".$lugar?></li>
+				 
+				</ul>
+		     </div>
+            </div>
+            <!-- /.box-body -->
 
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder="por ejemplo Titulares o Cuerpo Diplomático  ..." required>
-                  </div>
-                </div>
-                          
-                 <div class="form-group">
-                  <label for="comentarios" class="col-sm-2 control-label">Descripción</label>
-
-                  <div class="col-sm-10">
-                     <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Una breve Descripción de las personas que conforman el grupo"></textarea>
-                  </div>
-                </div>            
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <button type="reset" class="btn btn-default">Borrar campos</button>
-                <button type="submit" class="btn btn-info pull-right">Crear grupo</button>
-              </div>
-              <!-- /.box-footer -->
-            </form>
+            <a href="out.VerEventos.php"><b>Retornar a la lista de eventos</b></a>
           </div>
-
-        </div> <!-- FIN DE COLUMNA 2 -->
-
-
-        <div class="col-md-3">
-
-        </div> <!-- FIN DE COLUMNA 3 -->
-</div> <!-- FIN DE FILA -->
-
-
+          <!-- /.box -->
 <?php
  //////FIN MI CODIGO                 
 $this->contentContainerEnd();
