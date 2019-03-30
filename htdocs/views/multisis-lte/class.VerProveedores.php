@@ -79,11 +79,11 @@ require_once("SeedDMS/Preview.php");
 $newDate = date("d-m-Y", strtotime($fecha));
 return  $newDate;
 }
- function contarHitos($dms)
+ function contarProveedores($dms)
 	 {
 	 	$res=true;
 		$db = $dms->getDB();
-		$consultar = "SELECT COUNT(*) FROM hitos_eventos;";
+		$consultar = "SELECT COUNT(*) FROM proveedores_evento;";
 		//echo "Consultar: ".$consultar;
 		$res1 = $db->getResultArray($consultar);
 		return $res1[0]['COUNT(*)'];
@@ -120,9 +120,11 @@ class SeedDMS_View_VerProveedores extends SeedDMS_Bootstrap_Style
 
 		$db = $dms->getDB();
 		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
-    $consultar = "SELECT * FROM hitos_eventos;";
-      $res1 = $db->getResultArray($consultar);
-		$this->htmlStartPage("Lista de hitos del evento $nombreEvento", "skin-blue sidebar-mini  sidebar-collapse");
+    $consultar = "SELECT * FROM proveedores_evento WHERE id_evento=$idEvento";
+    //echo "consultar todo: ".$consultar;
+    $res1 = $db->getResultArray($consultar);
+
+		$this->htmlStartPage("Lista de proveedores del evento $nombreEvento", "skin-blue sidebar-mini  sidebar-collapse");
 		$this->containerStart();
 		$this->mainHeader();
 		$this->mainSideBar();
@@ -133,7 +135,7 @@ class SeedDMS_View_VerProveedores extends SeedDMS_Bootstrap_Style
 		  <ol class="breadcrumb">
         <li><a href="out.ViewFolder.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <?php echo "<li><a href=\"out.VerEvento.php?id=$idEvento\"> Tracking del evento $nombreEvento </a></li>"; ?>
-        <li class="active">Ver hitos de este evento</li>
+        <li class="active">Ver proveedores de este evento</li>
       </ol>
     <div class="gap-10"></div>
     <div class="row">
@@ -143,11 +145,11 @@ class SeedDMS_View_VerProveedores extends SeedDMS_Bootstrap_Style
     <?php
     //en este bloque php va "mi" código
   
- $this->startBoxPrimary("Listado de hitos del evento <b>$nombreEvento</b>");
+ $this->startBoxPrimary("Listado de proveedores del evento <b>$nombreEvento</b>");
 $this->contentContainerStart();
 //////INICIO MI CODIGO
 ?>
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Agregar nuevo hito</button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Agregar nuevo proveedor</button>
  <div class="box">
 
             <div class="box-header">
@@ -158,11 +160,12 @@ $this->contentContainerStart();
               <table id="tablaEventos" class="table table-hover table-striped table-condensed">
               	<thead>
                 <tr>
-                  <th>Nombre del hito</th>
-                  <th>deadline</th>
-                  <th>Estado</th>
-                  <th>Comentario</th>
-                  <th>Link a carpeta con anexos</th>           
+                  <th>Nombre del proveedor</th>
+                  <th>Servicio que brinda</th>
+                  <th>Monto que cobrará</th>
+                  <th>Link a carpeta</th>
+                   <th><b>Ver la lista de abonos a este proveedor</b></th>
+                          
                 </tr>
                </thead>
                <tbody>
@@ -170,23 +173,24 @@ $this->contentContainerStart();
                 	
                 	//////////////// DIBUJO TABLA
 
-                	$numEventos=contarHitos($dms);
+                	$numEventos=contarProveedores($dms);
 					//echo "Consultar: ".$consultar;
 				  	
                 	for($cont=0;$cont<$numEventos;$cont++)
                 	{
                 		echo ' <tr>';
                 		//1. nombre
-                    $idItem=$res1[$cont]['id'];
-                		 echo "<td><a href=\"#\" id=\"nombre_hito\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"../modificarHito.php\" data-title=\"Funciones ejercidas\">".$res1[$cont]['nombre_hito']."</a></td>";
-                		 //2. fecha de inicio a fin
-                		 echo "<td><a href=\"#\" id=\"deadline\" data-type=\"combodate\" data-pk=\"$idItem\" data-url=\"../modificarHito.php\" data-title=\"deadline\">".$res1[$cont]['deadline']."</a></td>";
-                		  // 3. lugar
-                		echo "<td><a href=\"#\" id=\"estado\" data-type=\"select\" data-pk=\"$idItem\" data-url=\"../modificarHito.php\" data-source=\"{'Planificado': 'Planificado', 'Iniciado': 'Iniciado', 'Completado': 'Completado'}\" >".$res1[$cont]['estado']."</a></td>";
-                		  // 4. enlace para editar
-                      echo "<td><a href=\"#\" id=\"comentario\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"../modificarHito.php\" data-title=\"Comentario\">".$res1[$cont]['comentario']."</a></td>";
+                    $idProveedor=$res1[$cont]['id'];
+                		 echo "<td><a href=\"#\" id=\"nombre\" data-type=\"text\" data-pk=\"$idProveedor\" data-url=\"../modificarProveedor.php\" data-title=\"Funciones ejercidas\">".$res1[$cont]['nombre']."</a></td>";
+                	
+                	
+                      echo "<td><a href=\"#\" id=\"descripcion\" data-type=\"text\" data-pk=\"$idProveedor\" data-url=\"../modificarProveedor.php\" data-title=\"Comentario\">".$res1[$cont]['descripcion']."</a></td>";
                 		  //$idEvento=$res1[$cont]['id'];
-                		 echo "<td><a href=\"#\" id=\"link_anexos\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"../modificarHito.php\" data-title=\"Comentario\">".$res1[$cont]['link_anexos']."</a></td>";
+                		 echo "<td><a href=\"#\" id=\"monto_total\" data-type=\"number\" data-pk=\"$idProveedor\" data-url=\"../modificarProveedor.php\" data-title=\"monto_total\">".$res1[$cont]['monto_total']."</a></td>";
+
+                     echo "<td><a href=\"#\" id=\"link_carpeta\" data-type=\"text\" data-pk=\"$idProveedor\" data-url=\"../modificarProveedor.php\" data-title=\"link_carpeta\">".$res1[$cont]['link_carpeta']."</a></td>";
+
+                     echo "<td><a href=\"out.VerAbonos.php?evento=$idEvento?proveedor=$idProveedor\" id=\"link_abonos\">"."Ver abonos"."</a></td>";
 
 
                      echo ' </tr>';
@@ -213,7 +217,7 @@ $this->contentContainerStart();
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Añadiendo nuevo hito.</h4>
+                <h4 class="modal-title">Añadiendo nuevo proveedor.</h4>
               </div>
               <div class="modal-body">
               <p>Aquí deberán añadirse aquellos hitos importantes para el tracking, por ejemplo, contacto con proveedores, reuniones de seguimiento, etc.</p>
@@ -224,51 +228,44 @@ $this->contentContainerStart();
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-      <form class="form-horizontal" name="formularioGrupo" id="formularioGrupo" action="out.HitoAnadido.php" method="POST" enctype="multipart/form-data">
-        <?php  echo "<input type=\"hidden\" name=\"idEvento\" id=\"idEvento\" value=\"$idEvento\"></input>"; ?>
+      <form class="form-horizontal" name="formularioGrupo" id="formularioGrupo" action="out.ProveedorAnadido.php" method="POST" enctype="multipart/form-data">
+        <?php  echo "<input type=\"hidden\" name=\"nombreEvento\" id=\"nombreEvento\" value=\"$nombreEvento\"></input>"; 
+        echo "<input type=\"hidden\" name=\"idEvento\" id=\"idEvento\" value=\"$idEvento\"></input>";
+        ?>
               <div class="box-body">
 
                 <div class="form-group">
-                  <label for="nombre" class="col-sm-2 control-label">Nombre del hito</label>
+                  <label for="nombre_proveedor" class="col-sm-2 control-label">Nombre del proveedor</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nombre2" name="nombre2" placeholder="por ejemplo reunión inicial  ..." required>
+                    <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor" placeholder="por ejemplo DJ PEPE ..." required>
                   </div>
                 </div>
                           
 
                 <div class="form-group">
-                  <label for="estado" class="col-sm-2 control-label">Estado del hito</label>
+                  <label for="descripcion_proveedor" class="col-sm-2 control-label">Descripción</label>
 
                   <div class="col-sm-10">
-                   <?php imprimirEstados(); ?>
+                   <input type="text" class="form-control" id="descripcion_proveedor" name="descripcion_proveedor" placeholder="por ejemplo  Disco  ..." required>
                   </div>
                 </div> 
 
                 <div class="form-group">
-                  <label for="deadline2" class="col-sm-2 control-label">Deadline</label>
+                  <label for="monto_cobrar" class="col-sm-2 control-label">Monto total que cobrará</label>
 
                   <div class="col-sm-10">
-                    <input type="date"  class="form-control" id="deadline2" name="deadline2" placeholder="Seleccionar de calendario  ..." required>
-                  </div>
-
-                </div> 
-
-                <div class="form-group">
-                  <label for="comentario" class="col-sm-2 control-label">Comentario</label>
-
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="comentario2" name="comentario2" placeholder="Un comentario sobre el mismo  ..." required>
+                    <input type="number"  class="form-control" id="monto_cobrar" name="monto_cobrar" placeholder="Ingresar cantidad  ..." required>
                   </div>
 
                 </div> 
 
 
                  <div class="form-group">
-                  <label for="link" class="col-sm-2 control-label">Link a carpeta</label>
+                  <label for="link_proveedor" class="col-sm-2 control-label">Link a carpeta</label>
 
                   <div class="col-sm-10">
-                    <input type="number" min="1" class="form-control" id="link" name="link" placeholder="Link a Google Drive o carpeta en este sistema  ..." >
+                    <input type="number" min="1" class="form-control" id="link" name="link_proveedor" placeholder="Link a Google Drive o carpeta en este sistema  ..." >
                   </div>
 
                 </div> 
@@ -295,7 +292,7 @@ $this->contentContainerStart();
               </div>
               <div class="modal-footer">
                 <button type="reset" class="btn btn-default">Borrar campos</button>
-                <button type="submit" class="btn btn-success pull-right">Crear hito a este evento</button>
+                <button type="submit" class="btn btn-success pull-right">Crear proveedor para este evento</button>
               </div>
             </div>
             <!-- /.modal-content -->

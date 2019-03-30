@@ -153,12 +153,12 @@ $this->contentContainerStart();
             <div class="info-box-content">
               <span class="info-box-text"><h3>Mi evento</h3></span>
 
-               <p>Lugar:<span class="info-box-number">
+               <p>Nombre del evento:<span class="info-box-number">
                 <?php 
                 if($user->isAdmin())
                 {
 
-                  echo "<td><a href=\"#\" id=\"lugar\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"../modificarEvento.php\" data-title=\"nombre\">".$res1[0]['nombre']."</a></td>";
+                  echo "<td><a href=\"#\" id=\"nombre\" data-type=\"text\" data-pk=\"$idItem\" data-url=\"../modificarEvento.php\" data-title=\"nombre\">".$res1[0]['nombre']."</a></td>";
                 }
 
                 else
@@ -291,7 +291,7 @@ $this->contentContainerStart();
 
         echo "Ver lista de proveedores de este evento y editarlos:";
         echo "<a class=\"btn btn-info\" href=\"out.VerProveedores.php?evento=$idEvento\">".'
-                <i class="fa fa-file"></i> Lista de hitos de este evento
+                <i class="fa fa-file"></i> Lista de proveedores de este evento
               </a>';
 
       }

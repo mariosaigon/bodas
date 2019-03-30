@@ -64,6 +64,36 @@ var anoActual = currentTime.getFullYear();
 		  }
         });
 
+	$('[id="nombre"]').editable({
+			params: function(params) {  //params already contain `name`, `value` and `pk`
+			var data = {};
+			data['pk'] = params.pk;
+			data['name'] = params.name;
+			data['value'] = params.value;
+			return data;
+		  }
+        });
+
+	$('[id="monto_total"]').editable({
+			params: function(params) {  //params already contain `name`, `value` and `pk`
+			var data = {};
+			data['pk'] = params.pk;
+			data['name'] = params.name;
+			data['value'] = params.value;
+			return data;
+		  }
+        });
+
+	$('[id="link_carpeta"]').editable({
+			params: function(params) {  //params already contain `name`, `value` and `pk`
+			var data = {};
+			data['pk'] = params.pk;
+			data['name'] = params.name;
+			data['value'] = params.value;
+			return data;
+		  }
+        });
+
 	$('[id^="cantidad_invitados"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};
@@ -75,7 +105,7 @@ var anoActual = currentTime.getFullYear();
         });
 	///////////////EDITAR PROYECTO
 
-$('[id^="descripcion"]').editable({
+$('[id="descripcion"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};
 			data['pk'] = params.pk;
