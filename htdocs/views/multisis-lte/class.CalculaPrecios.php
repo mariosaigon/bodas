@@ -86,6 +86,19 @@ class SeedDMS_View_CalculaPrecios extends SeedDMS_Bootstrap_Style
 $this->contentContainerStart();
 //////INICIO MI CODIGO
 ?>
+
+<div class="form-group">
+                  <label for="invitados">Nombre del evento</label>
+                  <input type="text" class="form-control" id="nomevento"  name="nomevento" placeholder="Ingrese un nombre">
+</div>
+
+
+<div class="form-group">
+                  <label for="invitados">Correo electrónico de contacto</label>
+                  <input type="email" class="form-control" id="email"  name="email" placeholder="Ingrese un email">
+</div>
+
+
 <div class="form-group">
                   <label for="invitados">Indique el número de invitados</label>
                   <input type="number" class="form-control" id="invitados"  name="invitados" placeholder="Ingrese un número">

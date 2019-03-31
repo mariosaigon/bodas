@@ -34,12 +34,10 @@ $('input[name=pastel]').click(function()
             precioUnitarioPastel=1.50;
           }
 
-          if(invitados>150)
+          if(invitados>=150)
           {
             precioUnitarioPastel=1.45;
           }
-
-
 
 
 
@@ -94,7 +92,7 @@ $('input[name=sweet]').click(function()
             precioUnitarioPastel=3.00;
           }
 
-          if(invitados>150)
+          if(invitados>=150)
           {
             precioUnitarioPastel=2.95;
           }
@@ -152,7 +150,7 @@ $('input[name=postres]').click(function()
             precioUnitarioPastel=1.16;
           }
 
-          if(invitados>150)
+          if(invitados>=150)
           {
             precioUnitarioPastel=1.12;
           }
@@ -207,7 +205,7 @@ $('input[name=rellena]').click(function()
             precioUnitarioPastel=7.25;
           }
 
-          if(invitados>200)
+          if(invitados>=200)
           {
             precioUnitarioPastel=6.85;
           }
@@ -261,7 +259,7 @@ $('input[name=suprema]').click(function()
             precioUnitarioPastel=6.5;
           }
 
-          if(invitados>200)
+          if(invitados>=200)
           {
             precioUnitarioPastel=6.25;
           }
@@ -314,7 +312,7 @@ $('input[name=cerdo]').click(function()
             precioUnitarioPastel=7;
           }
 
-          if(invitados>200)
+          if(invitados>=200)
           {
             precioUnitarioPastel=6.35;
           }
@@ -367,7 +365,7 @@ $('input[name=res]').click(function()
             precioUnitarioPastel=7.5;
           }
 
-          if(invitados>200)
+          if(invitados>=200)
           {
             precioUnitarioPastel=7;
           }
@@ -421,12 +419,13 @@ $('input[name=parrillada]').click(function()
             precioUnitarioPastel=7.5;
           }
 
-          if(invitados>200)
+          if(invitados>=200)
           {
             precioUnitarioPastel=7;
           }
 
            //al final, muestro precio final
+           console.log("en parrillada: precioUnitario es "+precioUnitarioPastel+" y invitados son "+invitados);
            var precioFinal=invitados*precioUnitarioPastel;
            precioFinal=Math.round(precioFinal * 100) / 100;
            console.log("El precio final es: "+precioFinal);
