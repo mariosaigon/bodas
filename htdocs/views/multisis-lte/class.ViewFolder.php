@@ -522,9 +522,14 @@ $(document).ready(function(){
           </div>
           <!-- /.box -->
 
+
+
         <?php
  
-        	
+        	 echo "Ver lista de proveedores de este evento y editarlos:";
+        echo "<a class=\"btn btn-success\" href=\"out.CalculaPrecios.php\">".'
+                <i class="fa fa-calculator"></i> Acceder a calculadora de tu evento
+              </a>';
         echo '</div>'; //otra media pagina  cierro
 
 
