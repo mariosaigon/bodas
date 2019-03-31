@@ -79,11 +79,11 @@ require_once("SeedDMS/Preview.php");
 $newDate = date("d-m-Y", strtotime($fecha));
 return  $newDate;
 }
- function contarProveedores($dms)
+ function contarProveedores($idEvento,$dms)
 	 {
 	 	$res=true;
 		$db = $dms->getDB();
-		$consultar = "SELECT COUNT(*) FROM proveedores_evento;";
+		$consultar = "SELECT COUNT(*) FROM proveedores_evento WHERE id_evento=$idEvento";
 		//echo "Consultar: ".$consultar;
 		$res1 = $db->getResultArray($consultar);
 		return $res1[0]['COUNT(*)'];
@@ -161,9 +161,12 @@ $this->contentContainerStart();
               	<thead>
                 <tr>
                   <th>Nombre del proveedor</th>
+                    <th>Correo</th>
+                      <th>Teléfono</th>
                   <th>Servicio que brinda</th>
                   <th>Monto que cobrará</th>
                   <th>Link a carpeta</th>
+                  <th>Total Pagado/ Por pagar</th>
                    <th><b>Ver la lista de abonos a este proveedor</b></th>
                           
                 </tr>
@@ -173,7 +176,7 @@ $this->contentContainerStart();
                 	
                 	//////////////// DIBUJO TABLA
 
-                	$numEventos=contarProveedores($dms);
+                	$numEventos=contarProveedores($idEvento,$dms);
 					//echo "Consultar: ".$consultar;
 				  	
                 	for($cont=0;$cont<$numEventos;$cont++)
@@ -182,6 +185,10 @@ $this->contentContainerStart();
                 		//1. nombre
                     $idProveedor=$res1[$cont]['id'];
                 		 echo "<td><a href=\"#\" id=\"nombre\" data-type=\"text\" data-pk=\"$idProveedor\" data-url=\"../modificarProveedor.php\" data-title=\"Funciones ejercidas\">".$res1[$cont]['nombre']."</a></td>";
+
+                     echo "<td><a href=\"#\" id=\"correo\" data-type=\"text\" data-pk=\"$idProveedor\" data-url=\"../modificarProveedor.php\" data-title=\"correo\">".$res1[$cont]['correo']."</a></td>";
+
+                     echo "<td><a href=\"#\" id=\"telefono\" data-type=\"text\" data-pk=\"$idProveedor\" data-url=\"../modificarProveedor.php\" data-title=\"telefono\">".$res1[$cont]['telefono']."</a></td>";
                 	
                 	
                       echo "<td><a href=\"#\" id=\"descripcion\" data-type=\"text\" data-pk=\"$idProveedor\" data-url=\"../modificarProveedor.php\" data-title=\"Comentario\">".$res1[$cont]['descripcion']."</a></td>";
@@ -189,6 +196,21 @@ $this->contentContainerStart();
                 		 echo "<td><a href=\"#\" id=\"monto_total\" data-type=\"number\" data-pk=\"$idProveedor\" data-url=\"../modificarProveedor.php\" data-title=\"monto_total\">".$res1[$cont]['monto_total']."</a></td>";
 
                      echo "<td><a href=\"#\" id=\"link_carpeta\" data-type=\"text\" data-pk=\"$idProveedor\" data-url=\"../modificarProveedor.php\" data-title=\"link_carpeta\">".$res1[$cont]['link_carpeta']."</a></td>";
+
+                     $pagadoProveedor=0;
+                     $consultarPagado = "SELECT SUM(monto) FROM abonos_proveedor WHERE id_proveedor=$idProveedor AND id_evento=$idEvento;";
+                    //echo "consultar todo: ".$consultar;
+                     $respagado = $db->getResultArray($consultarPagado);
+                     $pagadoProveedor=intval($respagado[0]['SUM(monto)']);
+                     //total
+                      $totalProveeedor=0;
+                     $consultarTotal = "SELECT monto_total FROM proveedores_evento WHERE id=$idProveedor;";
+                    //echo "consultar todo: ".$consultar;
+                     $restotal = $db->getResultArray($consultarTotal);
+                     $totalProveeedor=intval($restotal[0]['monto_total']);
+
+
+                     echo "<td>Pagados $".$pagadoProveedor." de un total de $".$totalProveeedor."</td>";
 
                      echo "<td><a href=\"out.VerAbonos.php?evento=$idEvento&proveedor=$idProveedor\" id=\"link_abonos\">"."Ver abonos"."</a></td>";
 
@@ -239,6 +261,23 @@ $this->contentContainerStart();
 
                   <div class="col-sm-10">
                     <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor" placeholder="por ejemplo DJ PEPE ..." required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="correo" class="col-sm-2 control-label">Correo electrónico</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="correo_proveedor" name="correo_proveedor" placeholder="por ejemplo info@.wjproductions.co ..." >
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label for="telefono" class="col-sm-2 control-label">Teléfono de contacto</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="telefono_proveedor" name="telefono_proveedor" placeholder="por ejemplo 2255 6555 ..." required>
                   </div>
                 </div>
                           

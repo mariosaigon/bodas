@@ -24,12 +24,12 @@ include("../inc/inc.Extension.php");
 include("../inc/inc.DBInit.php");
 include("../inc/inc.ClassUI.php");
 include("../inc/inc.Authentication.php");
- function crearItem($idEvento,$nombre_proveedor,$descripcion_proveedor,$monto_cobrar,$link_proveedor,$dms)
+ function crearItem($idEvento,$nombre_proveedor,$descripcion_proveedor,$monto_cobrar,$link_proveedor,$correo,$telefono,$dms)
 	 {
 	 	$res=true;
 		$db = $dms->getDB();
-		$insertar = "INSERT INTO proveedores_evento VALUES(NULL,$idEvento,'$nombre_proveedor','$descripcion_proveedor',$monto_cobrar,'$link_proveedor')";
-		//echo "INSERTAR: ".$insertar;
+		$insertar = "INSERT INTO proveedores_evento VALUES(NULL,$idEvento,'$nombre_proveedor','$descripcion_proveedor',$monto_cobrar,'$link_proveedor','$correo','$telefono')";
+		echo "INSERTAR: ".$insertar;
 		$res1 = $db->getResult($insertar);
 		$idCreado=$db->getInsertID();
 		return $idCreado;
@@ -72,6 +72,16 @@ if (isset($_POST["link_proveedor"])) {
 	$link_proveedor=$_POST["link_proveedor"];
 }
 
+$telefono="";
+if (isset($_POST["telefono_proveedor"])) {
+	$telefono=$_POST["telefono_proveedor"];
+}
+
+$correo="";
+if (isset($_POST["correo_proveedor"])) {
+	$correo=$_POST["correo_proveedor"];
+}
+
 $nombreEvento="";
 if (isset($_POST["nombreEvento"])) {
 	$nombreEvento=$_POST["nombreEvento"];
@@ -86,7 +96,7 @@ if (isset($_POST["idEvento"])) {
 $tmp = explode('.', basename($_SERVER['SCRIPT_FILENAME']));
 $view = UI::factory($theme, $tmp[1], array('dms'=>$dms, 'user'=>$user));
 //CREACIÓN COMO TAL
-crearItem($idEvento,$nombre_proveedor,$descripcion_proveedor,$monto_cobrar,$link_proveedor,$dms);
+crearItem($idEvento,$nombre_proveedor,$descripcion_proveedor,$monto_cobrar,$link_proveedor,$correo,$telefono,$dms);
 
 
 if($view) {

@@ -113,7 +113,7 @@ $this->contentContainerStart();
             </div>
             <!-- /.box-body -->
 
-           <?php  echo "<a href=\"out.VerHitos.php?id=$idEvento\"><b>Retornar a la lista de hitos</b></a>";  ?>
+           <?php  echo "<a href=\"out.VerHitos.php?evento=$idEvento\"><b>Retornar a la lista de hitos</b></a>";  ?>
           </div>
           <!-- /.box -->
 <?php

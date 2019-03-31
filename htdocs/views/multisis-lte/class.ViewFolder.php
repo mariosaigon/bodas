@@ -536,6 +536,38 @@ $(document).ready(function(){
 		////////////////////////// INICIO VISTA DE UUSUARIOS FINALES
 		if(!$user->isAdmin())
 		{
+				echo '<div class="col-lg-6" >'; //media pagina abro
+			
+						echo '<div class="col-lg-12 col-xs-12">
+				          <div class="small-box bg-yellow">
+				            <div class="inner">
+				              <h3>Ver mis eventos con Signature Events</h3>
+
+				              <p> y llenar sus datos</p>
+				            </div>
+				            <div class="icon">
+				              <i class="fa fa-calendar"></i>
+				            </div>
+				            <a href="out.AnadirEvento.php" class="small-box-footer">Acceder<i class="fa fa-arrow-circle-right"></i></a>
+				          </div>
+				        </div>';
+				        //ver lista
+				        echo '<div class="col-lg-12 col-xs-12">
+				          <div class="small-box bg-blue">
+				            <div class="inner">
+				              <h3>Ver lista de eventos</h3>
+
+				              <p> realizados y en curso</p>
+				            </div>
+				            <div class="icon">
+				              <i class="fa fa-list-alt"></i>
+				            </div>
+				            <a href="out.VerEventos.php" class="small-box-footer">Acceder<i class="fa fa-arrow-circle-right"></i></a>
+				          </div>
+				        </div>';
+					
+
+			echo '</div>'; //media pagina  cierro
 
 		} //fin de si es usuario
 		/////////////////////////////////////////7

@@ -79,11 +79,11 @@ require_once("SeedDMS/Preview.php");
 $newDate = date("d-m-Y", strtotime($fecha));
 return  $newDate;
 }
- function contarHitos($dms)
+ function contarHitos($idEvento,$dms)
 	 {
 	 	$res=true;
 		$db = $dms->getDB();
-		$consultar = "SELECT COUNT(*) FROM hitos_eventos;";
+		$consultar = "SELECT COUNT(*) FROM hitos_eventos WHERE id_evento=$idEvento";
 		//echo "Consultar: ".$consultar;
 		$res1 = $db->getResultArray($consultar);
 		return $res1[0]['COUNT(*)'];
@@ -170,7 +170,7 @@ $this->contentContainerStart();
                 	
                 	//////////////// DIBUJO TABLA
 
-                	$numEventos=contarHitos($dms);
+                	$numEventos=contarHitos($idEvento,$dms);
 					//echo "Consultar: ".$consultar;
 				  	
                 	for($cont=0;$cont<$numEventos;$cont++)

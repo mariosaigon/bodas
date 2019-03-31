@@ -122,7 +122,7 @@ class SeedDMS_View_VerEvento extends SeedDMS_Bootstrap_Style
 		?>
     <ol class="breadcrumb">
         <li><a href="out.ViewFolder.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="out.VerItems.php"> Experiencia Signature Events</a></li>
+        <li><a href="out.ViewFolder.php"> Experiencia Signature Events</a></li>
         <?php  echo "<li class=\"active\">Tracking - ". $res1[0]['nombre']."</li>"; ?>
       </ol>
     <div class="gap-10"></div>

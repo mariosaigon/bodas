@@ -44,6 +44,26 @@ var anoActual = currentTime.getFullYear();
 		  }
         });
 
+	$('[id="correo"]').editable({
+			params: function(params) {  //params already contain `name`, `value` and `pk`
+			var data = {};
+			data['pk'] = params.pk;
+			data['name'] = params.name;
+			data['value'] = params.value;
+			return data;
+		  }
+        });
+
+	$('[id="telefono"]').editable({
+			params: function(params) {  //params already contain `name`, `value` and `pk`
+			var data = {};
+			data['pk'] = params.pk;
+			data['name'] = params.name;
+			data['value'] = params.value;
+			return data;
+		  }
+        });
+
 	$('[id="link_anexos"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};

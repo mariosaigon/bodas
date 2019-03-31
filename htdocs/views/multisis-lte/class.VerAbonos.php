@@ -150,7 +150,13 @@ class SeedDMS_View_VerAbonos extends SeedDMS_Bootstrap_Style
   
  $this->startBoxPrimary("Listado de abonos al proveedor <b>$nombreProveedor</b> en el evento <b>$nombreEvento</b>");
 $this->contentContainerStart();
+
 //////INICIO MI CODIGO
+//TOTAL 
+$consultar2 = "SELECT * FROM abonos_proveedor WHERE id_evento=$idEvento AND id_proveedor=$idProveedor";
+    //echo "consultar todo: ".$consultar;
+    $res12 = $db->getResultArray($consultar2);
+
 ?>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Agregar nuevo abono a este proveedor</button>
  <div class="box">
