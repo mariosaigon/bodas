@@ -148,7 +148,7 @@ $this->contentContainerStart();
   <div class="col-md-6">
 
     <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+            <span class="info-box-icon bg-teal"><i class="ion ion-ios-people-outline"></i></span>
 
             <div class="info-box-content">
               <span class="info-box-text"><h3>Mi evento</h3></span>
@@ -259,15 +259,63 @@ $this->contentContainerStart();
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            
           </div>
 
 
-          <div class="progress progress-sm active">
-                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                  <span class="sr-only">20% Complete</span>
+         
+    <?php 
+    $totalHitos=0;
+    $totalHitosHechos=0;
+
+    $consultarHitos = "SELECT COUNT(id) FROM hitos_eventos WHERE id_evento=$idEvento";
+    $res2 = $db->getResultArray($consultarHitos);
+    $totalHitos=intval($res2[0]['COUNT(id)']); 
+    //
+    $consultarHitosHechos = "SELECT COUNT(id) FROM hitos_eventos WHERE id_evento=$idEvento AND estado=\"Completado\"";
+    $res3 = $db->getResultArray($consultarHitosHechos);
+    $totalHitosHechos=intval($res3[0]['COUNT(id)']); 
+
+     $avance=intval(($totalHitosHechos/$totalHitos)*100);
+
+    echo "<h2>Avance de su evento</h2>";
+    echo '<div class="description-block">';
+                   
+                      echo "<h5 class=\"description-header\">$avance %</h5>";
+                      echo '<span class="description-text">Avance</span></div>';
+    echo "<h4>Se han completado un total de $totalHitosHechos, de un conjunto de $totalHitos hitos o puntos clave definidos para su evento</h4>";
+
+
+
+    echo '<div class="progress progress-sm active">';
+   
+
+    if($avance>=0 && $avance < 40)
+    {
+      echo "<div class=\"progress-bar progress-bar-danger progress-bar-striped\" role=\"progressbar\" aria-valuenow=\"".$avance."\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:".$avance."%\">  <span class=\"sr-only\">20% Complete</span>"; 
+    }
+
+    if($avance>=40 && $avance < 65)
+
+    {
+      echo "<div class=\"progress-bar progress-bar-warning progress-bar-striped\" role=\"progressbar\" aria-valuenow=\"".$avance."\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:".$avance."%\">  <span class=\"sr-only\">20% Complete</span>"; 
+    }
+
+
+    if($avance>=65)
+
+    {
+      echo "<div class=\"progress-bar progress-bar-success progress-bar-striped\" role=\"progressbar\" aria-valuenow=\"".$avance."\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:".$avance."%\">  <span class=\"sr-only\">20% Complete</span>"; 
+    }
+
+
+
+
+
+    ?>
+                 
                 </div>
-              </div>
+          </div>
 
   </div>
 
@@ -280,9 +328,23 @@ $this->contentContainerStart();
 ?>
 
 
+
+
       <?php
-      if($user->isAdmin())
-      {
+      
+//////////////////////////////////////////////// TIMELINE DE HITOS
+
+
+echo '<div class="row">';
+
+
+
+      echo "<div class=\"col-md-6\">";
+echo "<h2>Modelado 3D de su evento: </h2>";
+      echo '<iframe src = "https://www.3deventdesigner.com/project/mobile/ae63612e7d905f396392105927b66d4f0ab00356" width = "945px" height = "615px" frameborder = "0" scrolling="no"></iframe>';
+
+      echo "<h3>Gestione los hitos y proveedores del evento: </h2>";
+
         echo "Ver lista de hitos de este evento y editarlos:";
         echo "<a class=\"btn btn-app\" href=\"out.VerHitos.php?evento=$idEvento\">".'
                 <i class="fa fa-heart-o"></i> Lista de hitos de este evento
@@ -294,15 +356,9 @@ $this->contentContainerStart();
                 <i class="fa fa-file"></i> Lista de proveedores de este evento
               </a>';
 
-      }
-//////////////////////////////////////////////// TIMELINE DE HITOS
+      
 
 
-echo '<div class="row">';
-
-
-
-      echo "<div class=\"col-md-6\">";
 
        echo "</div>"; //FIN DE COL IZQUIERDA
 
