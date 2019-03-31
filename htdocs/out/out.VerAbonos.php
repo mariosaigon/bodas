@@ -24,16 +24,7 @@ include("../inc/inc.Extension.php");
 include("../inc/inc.DBInit.php");
 include("../inc/inc.ClassUI.php");
 include("../inc/inc.Authentication.php");
- function crearItem($idEvento,$nombre_proveedor,$descripcion_proveedor,$monto_cobrar,$link_proveedor,$dms)
-	 {
-	 	$res=true;
-		$db = $dms->getDB();
-		$insertar = "INSERT INTO proveedores_evento VALUES(NULL,$idEvento,'$nombre_proveedor','$descripcion_proveedor',$monto_cobrar,'$link_proveedor')";
-		//echo "INSERTAR: ".$insertar;
-		$res1 = $db->getResult($insertar);
-		$idCreado=$db->getInsertID();
-		return $idCreado;
-	 }
+
 //tabla seeddms.tblattributedefinitions;
  //generan
 if ($user->isGuest()) {
@@ -51,43 +42,29 @@ $orderby='n';
 if (isset($_GET["orderby"]) && strlen($_GET["orderby"])==1 ) {
 	$orderby=$_GET["orderby"];
 }
-///campos del formulario
-$nombre_proveedor="";
-if (isset($_POST["nombre_proveedor"])) {
-	$nombre_proveedor=$_POST["nombre_proveedor"];
+
+$idEvento='0';
+if (isset($_GET["evento"])) {
+	$idEvento=$_GET["evento"];
 }
 
-$descripcion_proveedor="";
-if (isset($_POST["descripcion_proveedor"])) {
-	$descripcion_proveedor=$_POST["descripcion_proveedor"];
+
+$idProveedor='0';
+if (isset($_GET["proveedor"])) {
+	$idProveedor=$_GET["proveedor"];
 }
 
-$monto_cobrar="";
-if (isset($_POST["monto_cobrar"])) {
-	$monto_cobrar=$_POST["monto_cobrar"];
-}
+//nombre del proveedor
+$consultar = "SELECT nombre FROM proveedores_evento WHERE id=$idProveedor;";
+$res1 = $db->getResultArray($consultar);
+$nombreProveedor=$res1[0]['nombre'];
 
-$link_proveedor="";
-if (isset($_POST["link_proveedor"])) {
-	$link_proveedor=$_POST["link_proveedor"];
-}
-
-$nombreEvento="";
-if (isset($_POST["nombreEvento"])) {
-	$nombreEvento=$_POST["nombreEvento"];
-}
-
-$idEvento="";
-if (isset($_POST["idEvento"])) {
-	$idEvento=$_POST["idEvento"];
-}
-
+$consultar2 = "SELECT nombre FROM eventos WHERE id=$idEvento;";
+$res2 = $db->getResultArray($consultar2);
+$nombreEvento=$res2[0]['nombre'];
 
 $tmp = explode('.', basename($_SERVER['SCRIPT_FILENAME']));
 $view = UI::factory($theme, $tmp[1], array('dms'=>$dms, 'user'=>$user));
-//CREACIÓN COMO TAL
-crearItem($idEvento,$nombre_proveedor,$descripcion_proveedor,$monto_cobrar,$link_proveedor,$dms);
-
 
 if($view) {
 	$view->setParam('orderby', $orderby);
@@ -95,12 +72,11 @@ if($view) {
 	$view->setParam('workflowmode', $settings->_workflowMode);
 	$view->setParam('cachedir', $settings->_cacheDir);
 	$view->setParam('previewWidthList', $settings->_previewWidthList);
-	$view->setParam('timeout', $settings->_cmdTimeout);
-	$view->setParam('nombre_proveedor', $nombre_proveedor);
-	$view->setParam('descripcion_proveedor', $descripcion_proveedor);
-	$view->setParam('monto_cobrar', $monto_cobrar);
 	$view->setParam('idEvento', $idEvento);
+	$view->setParam('idProveedor', $idProveedor);
 	$view->setParam('nombreEvento', $nombreEvento);
+	$view->setParam('nombreProveedor', $nombreProveedor);
+	$view->setParam('timeout', $settings->_cmdTimeout);
 
 	$view($_GET);
 	exit;

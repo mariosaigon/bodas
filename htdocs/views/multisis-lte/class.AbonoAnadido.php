@@ -45,7 +45,7 @@ require_once("SeedDMS/Preview.php");
  -dias: documentos que van a caducar dentro de cúantos días
  */
 
-class SeedDMS_View_ProveedorAnadido extends SeedDMS_Bootstrap_Style 
+class SeedDMS_View_AbonoAnadido extends SeedDMS_Bootstrap_Style 
 {
  /**
  Método que muestra los documentos próximos a caducar sólo de 
@@ -63,16 +63,20 @@ class SeedDMS_View_ProveedorAnadido extends SeedDMS_Bootstrap_Style
 		$previewwidth = $this->params['previewWidthList'];
 		$timeout = $this->params['timeout'];
 
-		$nombre_proveedor = $this->params['nombre_proveedor'];
-		$descripcion_proveedor = $this->params['descripcion_proveedor'];
-		$monto_cobrar = $this->params['monto_cobrar'];
+		$nombreProveedor = $this->params['nombreProveedor'];
 		$nombreEvento = $this->params['nombreEvento'];
+		$descripcion_proveedor = $this->params['descripcion_proveedor'];
+		$monto = $this->params['monto'];
+		$fecha = $this->params['fecha'];
 		$idEvento = $this->params['idEvento'];
+		$idProveedor = $this->params['idProveedor'];
+		$comentario = $this->params['comentario'];
+		$nombreEvento = $this->params['nombreEvento'];
 
 		$db = $dms->getDB();
 		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
 
-		$this->htmlStartPage("Proveedor añadido al evento $nombreEvento", "skin-blue sidebar-mini");
+		$this->htmlStartPage("Abono añadido al proveedor  $nombreProveedor en el evento $nombreEvento", "skin-blue sidebar-mini");
 		$this->containerStart();
 		$this->mainHeader();
 		$this->mainSideBar();
@@ -96,25 +100,25 @@ $this->contentContainerStart();
             <div class="box-header with-border">
               <i class="fa fa-bullhorn"></i>
 
-              <h3 class="box-title">Proveedor añadido con éxito</h3>
+              <h3 class="box-title">Abono registrado con éxito</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
             
               <div class="callout callout-success">
-                <h4>Resumen del proveedor creado:</h4>
+                <h4>Resumen del abono registrado:</h4>
 
 				 <ul>
-				 	 <li><?php echo "Nombre: ".$nombre_proveedor."para el evento ".$nombreEvento; ?></li>
-				   <li><?php echo "Descripcion: ".$descripcion_proveedor?></li>
-				   <li><?php echo "Monto a pagar: ".$monto_cobrar?></li>
+				 	 <li><?php echo "Monto abonado: ".$monto; ?></li>
+				   <li><?php echo "Fecha del pago:  ".$fecha?></li>
+				   <li><?php echo "Comentario: ".$comentario?></li>
 				 
 				</ul>
 		     </div>
             </div>
             <!-- /.box-body -->
 
-              <?php echo "<a href=\"out.VerProveedores.php?evento=$idEvento\"><b>Retornar a la lista de provedores del evento</b></a>"; ?>
+            <?php echo "<a href=\"out.VerAbonos.php?evento=$idEvento&proveedor=$idProveedor\"><b>Retornar a la lista de abonos del proveedor del evento</b></a>"; ?>
           </div>
           <!-- /.box -->
 <?php

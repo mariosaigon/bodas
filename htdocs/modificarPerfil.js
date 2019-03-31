@@ -94,6 +94,16 @@ var anoActual = currentTime.getFullYear();
 		  }
         });
 
+	$('[id="monto"]').editable({
+			params: function(params) {  //params already contain `name`, `value` and `pk`
+			var data = {};
+			data['pk'] = params.pk;
+			data['name'] = params.name;
+			data['value'] = params.value;
+			return data;
+		  }
+        });
+
 	$('[id^="cantidad_invitados"]').editable({
 			params: function(params) {  //params already contain `name`, `value` and `pk`
 			var data = {};
