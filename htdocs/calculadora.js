@@ -1,6 +1,7 @@
 
 
     //////////////////7INICIO PASTEL
+    var granTotal=0;
    
 $('input[name=pastel]').click(function() 
 {
@@ -44,6 +45,8 @@ $('input[name=pastel]').click(function()
            //al final, muestro precio final
            var precioFinal=invitados*precioUnitarioPastel;
             precioFinal=Math.round(precioFinal * 100) / 100;
+            granTotal=granTotal+precioFinal;
+            $('#granTotal').text('$'+granTotal);
            console.log("El precio final es: "+precioFinal);
            $('#preciopastel').text('$'+precioFinal);
         }
@@ -100,6 +103,8 @@ $('input[name=sweet]').click(function()
            //al final, muestro precio final
            var precioFinal=invitados*precioUnitarioPastel;
            precioFinal=Math.round(precioFinal * 100) / 100;
+           granTotal=granTotal+precioFinal;
+            $('#granTotal').text('$'+granTotal);
            console.log("El precio final es: "+precioFinal);
            $('#preciosweet').text('$'+precioFinal);
         }
@@ -158,6 +163,8 @@ $('input[name=postres]').click(function()
            //al final, muestro precio final
            var precioFinal=invitados*precioUnitarioPastel;
            precioFinal=Math.round(precioFinal * 100) / 100;
+           granTotal=granTotal+precioFinal;
+            $('#granTotal').text('$'+granTotal);
            console.log("El precio final es: "+precioFinal);
            $('#preciopostres').text('$'+precioFinal);
         }
@@ -215,6 +222,8 @@ $('input[name=rellena]').click(function()
            precioFinal=Math.round(precioFinal * 100) / 100;
            console.log("El precio final es: "+precioFinal);
            $('#preciorellena').text('$'+precioFinal);
+            granTotal=granTotal+precioFinal;
+            $('#granTotal').text('$'+granTotal);
         }
         else
         {
@@ -269,6 +278,8 @@ $('input[name=suprema]').click(function()
            precioFinal=Math.round(precioFinal * 100) / 100;
            console.log("El precio final es: "+precioFinal);
            $('#preciosuprema').text('$'+precioFinal);
+            granTotal=granTotal+precioFinal;
+            $('#granTotal').text('$'+granTotal);
         }
         else
         {
@@ -322,6 +333,8 @@ $('input[name=cerdo]').click(function()
            precioFinal=Math.round(precioFinal * 100) / 100;
            console.log("El precio final es: "+precioFinal);
            $('#preciocerdo').text('$'+precioFinal);
+            granTotal=granTotal+precioFinal;
+            $('#granTotal').text('$'+granTotal);
         }
         else
         {
@@ -375,6 +388,8 @@ $('input[name=res]').click(function()
            precioFinal=Math.round(precioFinal * 100) / 100;
            console.log("El precio final es: "+precioFinal);
            $('#preciores').text('$'+precioFinal);
+            granTotal=granTotal+precioFinal;
+            $('#granTotal').text('$'+granTotal);
         }
         else
         {
@@ -430,6 +445,59 @@ $('input[name=parrillada]').click(function()
            precioFinal=Math.round(precioFinal * 100) / 100;
            console.log("El precio final es: "+precioFinal);
            $('#precioparrillada').text('$'+precioFinal);
+            granTotal=granTotal+precioFinal;
+            $('#granTotal').text('$'+granTotal);
+        }
+        else
+        {
+            console.log("desapretado");
+            $(x).hide('slow');        
+        }
+   
+  } //fin de else si no hayinvitados
+  
+});
+
+//////// inicio barra libre
+$('input[name=barra]').click(function() 
+{
+  var precioUnitarioPastel=0;
+    var invitados=document.getElementById("invitados").value;
+    console.log("El número de invitados es : "+invitados);
+  if(invitados.localeCompare("")==0)
+  {
+    alert("Indique la cantidad de invitados.");
+  }
+
+  else
+  {
+      var x = document.getElementById("consoBarra");
+      if(document.getElementById("barra").checked == true)
+        {
+          console.log("apretado");
+          
+          if (x.style.display === "none") 
+          {
+          $(x).show('slow');
+          }   
+          //rango de precios
+         if(invitados>0 && invitados<150)
+          {
+            precioUnitarioPastel=2.99;
+          }
+
+          if(invitados>=150)
+          {
+            precioUnitarioPastel=2.49;
+          }
+           //al final, muestro precio final
+           //console.log("en parrillada: precioUnitario es "+precioUnitarioPastel+" y invitados son "+invitados);
+           var precioFinal=invitados*precioUnitarioPastel;
+           precioFinal=Math.round(precioFinal * 100) / 100;
+           console.log("El precio final es: "+precioFinal);
+           $('#preciobarra').text('$'+precioFinal);
+            granTotal=granTotal+precioFinal;
+            $('#granTotal').text('$'+granTotal);
         }
         else
         {

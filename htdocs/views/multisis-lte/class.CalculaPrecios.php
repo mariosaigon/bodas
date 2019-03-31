@@ -317,7 +317,17 @@ $this->contentContainerStart();
                   </div>               
                  </div>
 
+                 <div id="consoBarra" style="display: none;">
+                
+                	<h4>Precio total por este banquete: </h4>
+                	<p id="preciobarra"></p>	
+                	<img src="../barra.jpg"  alt="barra libre" height="300" width="220">	
 
+                	<h3>Incluye: Ron, Tequila, Whiskey, vino y vodka, según tu elección </h3>		      					
+				</div>
+
+				<h1>Total:  </h1>	
+				<h2 id="granTotal"></h2>	
                
 
 
