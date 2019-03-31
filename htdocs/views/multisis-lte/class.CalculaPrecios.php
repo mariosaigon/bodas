@@ -323,7 +323,7 @@ $this->contentContainerStart();
                 	<p id="preciobarra"></p>	
                 	<img src="../barra.jpg"  alt="barra libre" height="300" width="220">	
 
-                	<h3>Incluye: Ron, Tequila, Whiskey, vino y vodka, según tu elección </h3>		      					
+                	<h3>Incluye 3 tragos de ron, 3 de vodka y 3 de tequila por persona. Si desea diferentes escenarios con cantidades y bebidas con gusto preparararemos su cotización.</h3>		      					
 				</div>
 
 				<h1>Total:  </h1>	
