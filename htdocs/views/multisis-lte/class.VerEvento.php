@@ -341,7 +341,7 @@ echo '<div class="row">';
 
       echo "<div class=\"col-md-6\">";
 echo "<h2>Modelado 3D de su evento: </h2>";
-      echo '<iframe src = "https://www.3deventdesigner.com/project/mobile/ae63612e7d905f396392105927b66d4f0ab00356" width = "945px" height = "615px" frameborder = "0" scrolling="no"></iframe>';
+      echo '<iframe src = "https://www.3deventdesigner.com/project/mobile/ae63612e7d905f396392105927b66d4f0ab00356" width = "720px" height = "615px" frameborder = "0" scrolling="no"></iframe>';
 
       echo "<h3>Gestione los hitos y proveedores del evento: </h2>";
 
