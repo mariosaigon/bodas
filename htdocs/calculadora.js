@@ -116,14 +116,328 @@ $('input[name=sweet]').click(function()
   
 });
 
-
-
-
-
-
     /////// fin sweet pack
 
+//inicio mesa de postres
 
+$('input[name=postres]').click(function() 
+{
+  var precioUnitarioPastel=0;
+    var invitados=document.getElementById("invitados").value;
+    console.log("El número de invitados es : "+invitados);
+  if(invitados.localeCompare("")==0)
+  {
+    alert("Indique la cantidad de invitados.");
+  }
 
+  else
+  {
+      var x = document.getElementById("consoPostres");
+      if(document.getElementById("postres").checked == true)
+        {
+          console.log("apretado");
+          
+          if (x.style.display === "none") 
+          {
+          $(x).show('slow');
+          }   
+          //rango de precios
+          if(invitados<=50)
+          {
+            precioUnitarioPastel=1.2;
+          }
 
+          if(invitados>50 && invitados<150)
+          {
+            precioUnitarioPastel=1.16;
+          }
 
+          if(invitados>150)
+          {
+            precioUnitarioPastel=1.12;
+          }
+
+           //al final, muestro precio final
+           var precioFinal=invitados*precioUnitarioPastel;
+           precioFinal=Math.round(precioFinal * 100) / 100;
+           console.log("El precio final es: "+precioFinal);
+           $('#preciopostres').text('$'+precioFinal);
+        }
+        else
+        {
+            console.log("desapretado");
+            $(x).hide('slow');        
+        }
+   
+  } //fin de else si no hayinvitados
+  
+  
+});
+//
+/////inicio pechuga rellena
+$('input[name=rellena]').click(function() 
+{
+  var precioUnitarioPastel=0;
+    var invitados=document.getElementById("invitados").value;
+    console.log("El número de invitados es : "+invitados);
+  if(invitados.localeCompare("")==0)
+  {
+    alert("Indique la cantidad de invitados.");
+  }
+
+  else
+  {
+      var x = document.getElementById("consoRellena");
+      if(document.getElementById("rellena").checked == true)
+        {
+          console.log("apretado");
+          
+          if (x.style.display === "none") 
+          {
+          $(x).show('slow');
+          }   
+          //rango de precios
+          if(invitados>50 && invitados<99)
+          {
+            precioUnitarioPastel=8;
+          }
+
+          if(invitados>100 && invitados<200)
+          {
+            precioUnitarioPastel=7.25;
+          }
+
+          if(invitados>200)
+          {
+            precioUnitarioPastel=6.85;
+          }
+
+           //al final, muestro precio final
+           var precioFinal=invitados*precioUnitarioPastel;
+           precioFinal=Math.round(precioFinal * 100) / 100;
+           console.log("El precio final es: "+precioFinal);
+           $('#preciorellena').text('$'+precioFinal);
+        }
+        else
+        {
+            console.log("desapretado");
+            $(x).hide('slow');        
+        }
+   
+  } //fin de else si no hayinvitados
+  
+  
+});
+//////// inicio pechuga suprema
+$('input[name=suprema]').click(function() 
+{
+  var precioUnitarioPastel=0;
+    var invitados=document.getElementById("invitados").value;
+    console.log("El número de invitados es : "+invitados);
+  if(invitados.localeCompare("")==0)
+  {
+    alert("Indique la cantidad de invitados.");
+  }
+
+  else
+  {
+      var x = document.getElementById("consoSuprema");
+      if(document.getElementById("suprema").checked == true)
+        {
+          console.log("apretado");
+          
+          if (x.style.display === "none") 
+          {
+          $(x).show('slow');
+          }   
+          //rango de precios
+         if(invitados>50 && invitados<99)
+          {
+            precioUnitarioPastel=7.2;
+          }
+
+          if(invitados>100 && invitados<200)
+          {
+            precioUnitarioPastel=6.5;
+          }
+
+          if(invitados>200)
+          {
+            precioUnitarioPastel=6.25;
+          }
+
+           //al final, muestro precio final
+           var precioFinal=invitados*precioUnitarioPastel;
+           precioFinal=Math.round(precioFinal * 100) / 100;
+           console.log("El precio final es: "+precioFinal);
+           $('#preciosuprema').text('$'+precioFinal);
+        }
+        else
+        {
+            console.log("desapretado");
+            $(x).hide('slow');        
+        }
+   
+  } //fin de else si no hayinvitados
+  
+});
+//////// inicio lomito cerdo
+$('input[name=cerdo]').click(function() 
+{
+  var precioUnitarioPastel=0;
+    var invitados=document.getElementById("invitados").value;
+    console.log("El número de invitados es : "+invitados);
+  if(invitados.localeCompare("")==0)
+  {
+    alert("Indique la cantidad de invitados.");
+  }
+
+  else
+  {
+      var x = document.getElementById("consoCerdo");
+      if(document.getElementById("cerdo").checked == true)
+        {
+          console.log("apretado");
+          
+          if (x.style.display === "none") 
+          {
+          $(x).show('slow');
+          }   
+          //rango de precios
+         if(invitados>50 && invitados<99)
+          {
+            precioUnitarioPastel=7.5;
+          }
+
+          if(invitados>100 && invitados<200)
+          {
+            precioUnitarioPastel=7;
+          }
+
+          if(invitados>200)
+          {
+            precioUnitarioPastel=6.35;
+          }
+
+           //al final, muestro precio final
+           var precioFinal=invitados*precioUnitarioPastel;
+           precioFinal=Math.round(precioFinal * 100) / 100;
+           console.log("El precio final es: "+precioFinal);
+           $('#preciocerdo').text('$'+precioFinal);
+        }
+        else
+        {
+            console.log("desapretado");
+            $(x).hide('slow');        
+        }
+   
+  } //fin de else si no hayinvitados
+  
+});
+//////// inicio lomito res
+$('input[name=res]').click(function() 
+{
+  var precioUnitarioPastel=0;
+    var invitados=document.getElementById("invitados").value;
+    console.log("El número de invitados es : "+invitados);
+  if(invitados.localeCompare("")==0)
+  {
+    alert("Indique la cantidad de invitados.");
+  }
+
+  else
+  {
+      var x = document.getElementById("consoRes");
+      if(document.getElementById("res").checked == true)
+        {
+          console.log("apretado");
+          
+          if (x.style.display === "none") 
+          {
+          $(x).show('slow');
+          }   
+          //rango de precios
+         if(invitados>50 && invitados<99)
+          {
+            precioUnitarioPastel=8;
+          }
+
+          if(invitados>100 && invitados<200)
+          {
+            precioUnitarioPastel=7.5;
+          }
+
+          if(invitados>200)
+          {
+            precioUnitarioPastel=7;
+          }
+
+           //al final, muestro precio final
+           var precioFinal=invitados*precioUnitarioPastel;
+           precioFinal=Math.round(precioFinal * 100) / 100;
+           console.log("El precio final es: "+precioFinal);
+           $('#preciores').text('$'+precioFinal);
+        }
+        else
+        {
+            console.log("desapretado");
+            $(x).hide('slow');        
+        }
+   
+  } //fin de else si no hayinvitados
+  
+});
+
+//////// inicio parrillada
+$('input[name=parrillada]').click(function() 
+{
+  var precioUnitarioPastel=0;
+    var invitados=document.getElementById("invitados").value;
+    console.log("El número de invitados es : "+invitados);
+  if(invitados.localeCompare("")==0)
+  {
+    alert("Indique la cantidad de invitados.");
+  }
+
+  else
+  {
+      var x = document.getElementById("consoParrillada");
+      if(document.getElementById("parrillada").checked == true)
+        {
+          console.log("apretado");
+          
+          if (x.style.display === "none") 
+          {
+          $(x).show('slow');
+          }   
+          //rango de precios
+         if(invitados>50 && invitados<99)
+          {
+            precioUnitarioPastel=8.5;
+          }
+
+          if(invitados>100 && invitados<200)
+          {
+            precioUnitarioPastel=7.5;
+          }
+
+          if(invitados>200)
+          {
+            precioUnitarioPastel=7;
+          }
+
+           //al final, muestro precio final
+           var precioFinal=invitados*precioUnitarioPastel;
+           precioFinal=Math.round(precioFinal * 100) / 100;
+           console.log("El precio final es: "+precioFinal);
+           $('#precioparrillada').text('$'+precioFinal);
+        }
+        else
+        {
+            console.log("desapretado");
+            $(x).hide('slow');        
+        }
+   
+  } //fin de else si no hayinvitados
+  
+});

@@ -101,6 +101,9 @@ $this->contentContainerStart();
                 <b>Para mi evento, quiero: (seleccione)</b>
 
 
+                <h2>Pastelería y repostería:</h2>
+
+
                  <div class="form-group">
                   <div class="checkbox">
                     <label>
@@ -154,10 +157,143 @@ $this->contentContainerStart();
                   <div class="checkbox">
                     <label>
                       <input id="postres" name="postres" type="checkbox">
-                      Mesa de Postres
+                      Mesa de postres
                     </label>
                   </div>               
                  </div>
+
+
+                 <div id="consoPostres" style="display: none;">
+                
+                	<h4>Precio total por Mesa de postres: </h4>
+                	<p id="preciopostres"></p>	
+                	<img src="../postres.jpg" alt="mesa de postres" height="160" width="120">	
+
+                	<h3>Signature Events le regala: decoración mesa de postres. </h3>		      					
+				</div>
+
+
+
+				<h2>Banquetes para su evento. Seleccione su platilo preferido:</h2>
+
+				   <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input id="suprema" name="suprema" type="checkbox">
+                      Pechuga Suprema
+                    </label>
+                  </div>               
+                 </div>
+                 <div id="consoSuprema" style="display: none;">
+                
+                	<h4>Precio total por este banquete: </h4>
+                	<p id="preciosuprema"></p>	
+                	<img src="../suprema.png" alt="pechuga suprema" height="300" width="220">	
+
+                	<h3>Signature Events le regala: Cristalería completa, vasos de cristal, cubiertos, y meseros. </h3>		      					
+				</div>
+
+
+
+				<div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input id="rellena" name="rellena" type="checkbox">
+                      Pechuga Rellena
+                    </label>
+                  </div>               
+                 </div>
+                 <div id="consoRellena" style="display: none;">
+                
+                	<h4>Precio total por este banquete: </h4>
+                	<p id="preciorellena"></p>	
+                	<img src="../rellena.png"  alt="pechuga rellena" height="300" width="220">	
+
+                	<h3>Signature Events le regala: Cristalería completa, vasos de cristal, cubiertos, y meseros. </h3>		      					
+				</div>
+
+
+				<div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input id="cerdo" name="cerdo" type="checkbox">
+                      Lomito de cerdo
+                    </label>
+                  </div>               
+                 </div>
+                 <div id="consoCerdo" style="display: none;">
+                
+                	<h4>Precio total por este banquete: </h4>
+                	<p id="preciocerdo"></p>	
+                	<img src="../lomitocerdo.png"  alt="lomito cerdo" height="300" width="220">	
+
+                	<h3>Signature Events le regala: Cristalería completa, vasos de cristal, cubiertos, y meseros. </h3>		      					
+				</div>
+
+
+				<div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input id="res" name="res" type="checkbox">
+                      Lomito de res
+                    </label>
+                  </div>               
+                 </div>
+                 <div id="consoRes" style="display: none;">
+                
+                	<h4>Precio total por este banquete: </h4>
+                	<p id="preciores"></p>	
+                	<img src="../lomitores.png"  alt="lomito res" height="300" width="220">	
+
+                	<h3>Signature Events le regala: Cristalería completa, vasos de cristal, cubiertos, y meseros. </h3>		      					
+				</div>
+
+
+
+				<div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input id="parrillada" name="parrillada" type="checkbox">
+                      Parrillada
+                    </label>
+                  </div>               
+                 </div>
+                 <div id="consoParrillada" style="display: none;">
+                
+                	<h4>Precio total por este banquete: </h4>
+                	<p id="precioparrillada"></p>	
+                	<img src="../parrillada.png"  alt="parrillada" height="300" width="220">	
+
+                	<h3>Signature Events le regala: Cristalería completa, vasos de cristal, cubiertos, y meseros. </h3>		      					
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<h2>Barra Libre:</h2>
+
 
                  <div class="form-group">
                   <div class="checkbox">
