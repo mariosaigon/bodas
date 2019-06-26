@@ -131,8 +131,16 @@ $this->contentContainerStart();
               </table>
             </div>
             <!-- /.box-body -->
+
+            <div class="box-footer">
+            	<a class="btn btn-social-icon btn-dropbox"><i class="fa fa-plus"></i></a>
+         		 <p>Añadir nueva categoría</p>
+            </div>
+            
           </div>
           <!-- /.box -->
+
+          
 
 <?php
 $this->contentContainerEnd();
