@@ -133,12 +133,77 @@ $this->contentContainerStart();
             <!-- /.box-body -->
 
             <div class="box-footer">
-            	<a class="btn btn-social-icon btn-dropbox"><i class="fa fa-plus"></i></a>
-         		 <p>Añadir nueva categoría</p>
-            </div>
             
+
+            	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+               Añadir nueva categoría <i class="fa fa-plus"></i>
+              </button>
+
+
+         		 <p></p>
+            </div>
+
           </div>
           <!-- /.box -->
+
+
+        <div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Añadiendo nueva categoría de bebida</h4>
+              </div>
+              <div class="modal-body">
+
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-4 control-label">Nombre</label>
+
+                  <div class="col-sm-8">
+                    <input type="nombre" class="form-control" id="nombre" placeholder="Nombre de la categoría">
+                  </div>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-4 control-label">Margen de Ganancia Bruta (%) para 100 invitados</label>
+
+                  <div class="col-sm-8">
+                    <input type="number" class="form-control" id="mgb100" name="mgb100" placeholder="Ingrese margen de ganancia bruta para prorrateo para un aproximado de 100 personas">
+                  </div>
+                </div>
+
+
+                 <div class="form-group">
+                  <label for="mgb150" class="col-sm-4 control-label">Margen de Ganancia Bruta (%) para más de 150 invitados</label>
+
+                  <div class="col-sm-8">
+                    <input type="number" class="form-control"  id="mgb150" name="mgb150" placeholder="MGB para prorrateo para un aproximado de 150 o más personas">
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- /.box-footer -->
+            </form>
+               
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
 
           
 
