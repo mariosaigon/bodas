@@ -935,6 +935,12 @@ function menuClipboard($clipboard) { /* {{{ */
     echo "<div class=\"menu-info\"><h4 class=\"control-sidebar-subheading\">".getMLText("user_management")."</h4></div></a></li>";
     echo "<li><a href=\"".$this->params['settings']->_httpRoot."out/out.GroupMgr.php\"><i class=\"menu-icon fa fa-users bg-green\"></i>";
     echo "<div class=\"menu-info\"><h4 class=\"control-sidebar-subheading\">".getMLText("group_management")."</h4></div></a></li>";
+
+
+
+
+     echo "<li><a href=\"".$this->params['settings']->_httpRoot."out/out.GroupMgr.php\"><i class=\"menu-icon fa fa-users bg-teal\"></i>";
+     echo "<div class=\"menu-info\"><h4 class=\"control-sidebar-subheading\">".getMLText("group_management")."</h4></div></a></li>";
   	}
 
     echo "<li><a href=\"".$this->params['settings']->_httpRoot."out/out.BackupTools.php\"><i class=\"menu-icon fa fa-hdd-o bg-green\"></i>";
