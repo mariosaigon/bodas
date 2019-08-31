@@ -76,14 +76,14 @@ $manejador=new SeedDMS_Core_DatabaseAccess($driver,$host,$user,$pass,$base);
   	$rutaFoto="../../images/bebidas/$idCategoria/$idBebi".".jpg";
   	echo '<tr>';
   	echo "<td width=\"40%\" style=\"font-family:helvetica;font-size:160%;text-align:center;color:blue;\"><b>".$bebi['nombre']."</b></td>";
-  	echo "<td width=\"20%\" >"."<img src=\"$rutaFoto\" alt=\"Foto del guaro\" height=\"160\" width=\"180\">"."</td>";
+  	echo "<td width=\"20%\" >"."<img src=\"$rutaFoto\" alt=\"Foto del guaro\" class=\"img-responsive\">"."</td>";
+  	$idBebida="bebida-".$idBebi;
   	echo "<td width=\"20%\" >".'<div class="form-group">
                   <div class="checkbox">
-                    <label>
-                      <input type="checkbox">
+                    <label>';
+                      echo "<input type=\"checkbox\" id=\"$idBebida\">";
                       
-                    </label>
-                  </div>'."</td>";
+                    echo '</label></div>'."</td>";
   	echo '</tr>';
   }
 
