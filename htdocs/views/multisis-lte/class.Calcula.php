@@ -81,7 +81,7 @@ $manejador=new SeedDMS_Core_DatabaseAccess($driver,$host,$user,$pass,$base);
   	echo "<td width=\"20%\" >".'<div class="form-group">
                   <div class="checkbox">
                     <label>';
-                      echo "<input type=\"checkbox\" id=\"$idBebida\">";
+                      echo "<input type=\"checkbox\" value=\"$idBebi\" id=\"$idBebida\">";
                       
                     echo '</label></div>'."</td>";
   	echo '</tr>';
@@ -138,18 +138,24 @@ $this->contentContainerStart();
         <div class="col-md-8">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Indica la cantidad de invitados:</h3>
+              
 
 
               <div class="input-group">
-                <input type="number" id="cantidadInvitados" name="cantidadInvitados" class="form-control">
+                
                 
               </div>
-              <br>
 
+
+              <div id="contenedorInvitados" class="form-group ">
+                  <label class="control-label" for="inputInvis"><i class="fa fa-user"></i> Cantidad de invitados a tu evento</label>
+                 <input type="number" id="cantidadInvitados" name="cantidadInvitados" class="form-control" placeholder="Indique una cantidad...">
+                  
+                </div>
 
             </div>
             <!-- /.box-header -->
+            <h3 class="box-title">Selecciona cuales bebidas quieres de cada variedad:</h3>
             <div class="box-body">
               <div class="box-group" id="accordion">
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
@@ -312,6 +318,7 @@ $this->endsBoxPrimary();
 		$this->mainFooter();		
 		$this->containerEnd();
 		//$this->contentContainerEnd();
+		echo "<script type='text/javascript'  src='scriptBarra.js'></script>";
 		$this->htmlEndPage();
 	} /* }}} */
 }
