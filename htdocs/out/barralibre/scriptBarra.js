@@ -57,7 +57,7 @@ $.ajax({
 			var fecha=$("#fecha").val();								
 			var textofinal=""	
 			var cabecita='<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Resumen de tu barra libre</h3></div><div class="box-body">'				
-			var texto="<h5>Atención a:</h5><b>"+nombrePersona+"</b><h5>Fecha del evento :</h5>"+fecha+"<table id='data2' class=\"table table-bordered table-striped\"><thead><tr><th>Nombre de la bebida</th><th>Precio por persona</th></tr></thead><tbody>" 
+			var texto="<h5>Atención a:</h5><b>"+nombrePersona+"</b><h5>Fecha del evento :</h5>"+fecha+"<table id='data2' class=\"table table-bordered table-striped\"><thead><tr><th>Nombre de la bebida</th></tr></thead><tbody>" 
 			var contenido=""
 
 			var cont=0;
@@ -73,9 +73,9 @@ $.ajax({
 
 
                         
-                              contenido=contenido+"<td>$ "
-                              contenido=contenido+arrayPrecios[index]
-                              contenido=contenido+"</td>"
+                              // contenido=contenido+"<td>$ "
+                              // contenido=contenido+arrayPrecios[index]
+                              // contenido=contenido+"</td>"
                         
                               precioTotal=precioTotal+arrayPrecios[index];
                               precioTotal=Math.round(precioTotal * 100) / 100;
