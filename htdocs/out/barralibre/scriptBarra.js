@@ -1,65 +1,45 @@
 var numInvitados;
-$("#cantidadInvitados").change(function()
+var sumaProbabilidad=0;
+function getValueUsingParentTag(){
+	var chkArray = [];
+	
+	/* look for all checkboes that have a parent id called 'checkboxlist' attached to it and check if it was checked */
+	$("#macizo input:checked").each(function() {
+		chkArray.push($(this).val());
+	});
+	
+	/* we join the array separated by the comma */
+	var selected;
+	selected = chkArray.join(',') ;
+	
+	/* check if there is selected checkboxes, by default the length is 1 as it contains one single comma */
+	if(selected.length > 0)
+	{
+		//alert("You have selected " + selected);	
+		return selected;
+	}
+	else
+	{
+		alert("No se ha seleccionado ninguna bebida");	
+	}
+}
+function calculaPrecio(arrayBebidas)
 {
-        //alert("Añadida cantidad de invitados");
-        $( "#contenedorInvitados" ).removeClass( "has-error" );
-        $( "#contenedorInvitados" ).addClass( "has-success" );
-        numInvitados=$("#cantidadInvitados").val();
-    });
-///////////////////////////////////////////////
-$('input:checkbox').change( //escucho cambios de checkbox
-    function(){
-        if ($(this).is(':checked')) 
-        {
-        	var cantidad=$("#cantidadInvitados").val();
-        	if(cantidad.localeCompare("")==0)//si no hay cantidad de invitados; dar error y no hacer nada
-        	{
-        		alert("Cantidad de invitados vacía");
-        		// 1 deschequeo lo marcado
-        		$(this).prop("checked", false);
-
-        		//2 pongo en clase error roja el input de invitados cantidad
-        		$( "#contenedorInvitados" ).addClass( "has-error" );
-        	}
-
-        	else
-        	{
-        		//hacer cuestiones con los precios
-        		console.log("Id de la bebida seleccionado "+this.value);
-        		console.log("Cantidad de invitados: "+numInvitados);
-        	}
-            
-        }
-});
-           
-
-
-function myFunction() {
-	// 	var error = document.getElementById("fechita").value;
-	// if(error == "")
-	// {
- //    alert("NO FECHA")
-  
-	// }
-	//para hacer la consulta necesito tres cosas: si quiere institucion o municipalidad, fecha inicio, fecha fin
-  var x = document.getElementById("estadistica").value; //console.log("ID grupo: "+x);
-  //console.log("You selected: " + x);
-   var dataf1=[];
-   var arrayInstituciones=[];
-
-   //console.log("ANTES DEL AJAX------------FECHA INICIO:"+fechaInicio);
-	$.ajax({
-                        url:"consultaConformadas.php?estadistica="+x,
+$.ajax({
+                        url:"calculaPrecio.php?bebidas="+arrayBebidas+"&invitados="+numInvitados,
                         success:function(result)
                         {
 							   //tengo un array de ids de documentos que corresponde a esta estadística que me piden.
                               datosf1 = JSON.parse(result);
-                              var cantidadCompletos=0;
-                             //alert(result);
+                             	 var cantidadCompletos=0;
+                                 var arrayNombres=[];
+                                 var arrayPrecios=[];
+                             //alert(datosf1);
                               for (var index in datosf1) 
                               {
                              
-                              arrayInstituciones.push(datosf1[index][0])
+                              arrayNombres.push(datosf1[index][0])
+                              arrayPrecios.push(datosf1[index][1])
                               
                               
                              }
@@ -73,50 +53,37 @@ function myFunction() {
                              // var sprop=datosf1[6];
                              // var splup=datosf1[7];
                             
-								
-			var cabecerilla=""	
-			if(x==1)
-			{
-				cabecerilla="Comisiones de instituciones del Gobierno Central";
-			}
-			if(x==2)
-			{
-				cabecerilla="Comisiones de municipalidades";
-			}
-			if(x==3)
-			{
-				cabecerilla="Comisionados - Instituciones y municipalidades exoneradas de conformar CEG";
-			}				
+											
 			var textofinal=""	
-			var cabecita='<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Reporte de comisiones no conformadas del tipo '+cabecerilla+' </h3></div><div class="box-body">'				
-			var texto="<table id='data2' class=\"table table-bordered table-striped\"><thead><tr><th>N°</th><th>Institución</th></tr></thead><tbody>" 
+			var cabecita='<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Resumen de tu barra libre</h3></div><div class="box-body">'				
+			var texto="<table id='data2' class=\"table table-bordered table-striped\"><thead><tr><th>Nombre de la bebida</th><th>Precio por persona</th></tr></thead><tbody>" 
 			var contenido=""
 
 			var cont=1;
-			         for (var index in arrayInstituciones) 
+			var precioTotal=0;
+			         for (var index in arrayNombres) 
                               {
 
                               	contenido=contenido+"<tr>"
                               contenido=contenido+"<td>"
-                              contenido=contenido+cont;
+                              contenido=contenido+arrayNombres[index]
                               contenido=contenido+"</td>"
                               cont++;
 
 
                         
-                              contenido=contenido+"<td>"
-                              contenido=contenido+arrayInstituciones[index]
+                              contenido=contenido+"<td>$ "
+                              contenido=contenido+arrayPrecios[index]
                               contenido=contenido+"</td>"
-
-
                         
-
+                              precioTotal=precioTotal+arrayPrecios[index];
+                              precioTotal=Math.round(precioTotal * 100) / 100;
 
                               contenido=contenido+"</tr>"
                              }
                              
              //var totalito= arrayCantidades.reduce(function(a, b) { return a + b; }, 0);
-			var finalTabla="<tfoot><tr><td>TOTAL</td><td><b>"+Number(cont-1)+"</b></td></tr></tfoot></tbody></table></div></div>"
+			var finalTabla="<tfoot><tr><td>TOTAL</td><td><b> $"+Number(precioTotal)+"</b></td></tr></tfoot></tbody></table></div></div>"
 			textofinal=cabecita+texto+contenido+finalTabla
 			document.getElementById("tabla").innerHTML = textofinal
 			$('#data2').DataTable({
@@ -150,5 +117,48 @@ function myFunction() {
                         } // fin de success						
 						//console.log("b: "+dataf1[1])
                     }); //fin del ajax
-
 }
+
+$("#cantidadInvitados").change(function()
+{
+        //alert("Añadida cantidad de invitados");
+        $( "#contenedorInvitados" ).removeClass( "has-error" );
+        $( "#contenedorInvitados" ).addClass( "has-success" );
+        numInvitados=$("#cantidadInvitados").val();
+    });
+///////////////////////////////////////////////
+$('input:checkbox').change( //escucho cambios de checkbox
+    function(){
+        if ($(this).is(':checked')) //si marco una bebida
+        {
+        	var cantidad=$("#cantidadInvitados").val();
+        	if(cantidad.localeCompare("")==0)//si no hay cantidad de invitados; dar error y no hacer nada
+        	{
+        		alert("Por favor, indicanos el número de invitados a tu evento");
+        		// 1 deschequeo lo marcado
+        		$(this).prop("checked", false);
+
+        		//2 pongo en clase error roja el input de invitados cantidad
+        		$( "#contenedorInvitados" ).addClass("has-error");
+        	}
+
+        	else
+        	{
+        		//hacer cuestiones con los precios
+        		//console.log("Id de la bebida seleccionado "+this.value);
+        		var seleccionadas=getValueUsingParentTag();
+        		console.log("seleccionadas: "+seleccionadas);
+        		calculaPrecio(seleccionadas);
+        		
+		     }// FIN DEL ELSE
+            
+        }
+
+        else //si la quito (descmarco una bebida)
+        {
+        	var seleccionadas=getValueUsingParentTag();
+        	console.log("seleccionadas: "+seleccionadas);
+        	calculaPrecio(seleccionadas);
+        }	
+});
+           

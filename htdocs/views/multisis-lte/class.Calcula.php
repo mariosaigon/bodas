@@ -134,7 +134,7 @@ $this->contentContainerStart();
 ?>
  <h2 class="page-header">¡Arma tu barra libre! <i class="fa fa-glass"></i> </h2>
 
-      <div class="row">
+      <div class="row" id="macizo">
         <div class="col-md-8">
           <div class="box box-solid">
             <div class="box-header with-border">
@@ -294,7 +294,8 @@ $this->contentContainerStart();
           <!-- /.box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-2">
+        <div class="col-md-4">
+        			<div id="tabla"></div>
        
         </div>
         <!-- /.col -->
