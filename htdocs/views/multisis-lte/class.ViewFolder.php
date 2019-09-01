@@ -460,6 +460,21 @@ $(document).ready(function(){
 				            <a href="out.VerEventos.php" class="small-box-footer">Acceder<i class="fa fa-arrow-circle-right"></i></a>
 				          </div>
 				        </div>';
+
+
+				        echo '<div class="col-lg-12 col-xs-12">
+				          <div class="small-box bg-maroon">
+				            <div class="inner">
+				              <h3>Calculadora de barra libre</h3>
+
+				              <p>Cotiza tus bebidas!</p>
+				            </div>
+				            <div class="icon">
+				              <i class="fa fa-glass"></i>
+				            </div>
+				            <a href="barralibre/out.Calcula.php" class="small-box-footer">Acceder<i class="fa fa-arrow-circle-right"></i></a>
+				          </div>
+				        </div>';
 					
 
 			echo '</div>'; //media pagina  cierro
@@ -469,7 +484,7 @@ $(document).ready(function(){
         ?>
         	<div class="box">
             <div class="box-header">
-              <h3 class="box-title">Últimos eventos conseguidos</h3>
+              <h3 class="box-title">Últimos eventos en seguimiento</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">

@@ -59,7 +59,7 @@ $.ajax({
 			var texto="<table id='data2' class=\"table table-bordered table-striped\"><thead><tr><th>Nombre de la bebida</th><th>Precio por persona</th></tr></thead><tbody>" 
 			var contenido=""
 
-			var cont=1;
+			var cont=0;
 			var precioTotal=0;
 			         for (var index in arrayNombres) 
                               {
@@ -82,8 +82,20 @@ $.ajax({
                               contenido=contenido+"</tr>"
                              }
                              
+                             // penalidad
+                             var penalidad=0.30;
+                             if(cont>3)
+                             {
+                             	var cuantasExtras=cont-3;
+                             	var totalPenalidad=cuantasExtras*penalidad;
+                             	precioTotal=precioTotal+totalPenalidad;
+
+
+                             }                             	
+                          var precioGlobal=precioTotal*numInvitados;
+                          precioGlobal=Math.round(precioGlobal * 100) / 100;
              //var totalito= arrayCantidades.reduce(function(a, b) { return a + b; }, 0);
-			var finalTabla="<tfoot><tr><td>TOTAL</td><td><b> $"+Number(precioTotal)+"</b></td></tr></tfoot></tbody></table></div></div>"
+			var finalTabla="<tfoot><tr><td><b>Precio total por persona</b></td><td><b> $"+Number(precioTotal)+"</b></td></tr><tr><td style=\"text-align:center;color:blue;\"><b>Subtotal</b></td><td style=\"text-align:center;color:black;\"><b> $"+Number(precioGlobal)+"</b></td></tr></tfoot></tbody></table></div></div><p>El precio total es "+precioGlobal+"</p>"
 			textofinal=cabecita+texto+contenido+finalTabla
 			document.getElementById("tabla").innerHTML = textofinal
 			$('#data2').DataTable({
