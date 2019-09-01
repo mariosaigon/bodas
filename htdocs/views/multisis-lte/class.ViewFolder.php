@@ -431,9 +431,9 @@ $(document).ready(function(){
 		{
 			//crear
 		echo '<div class="row">'; //abro fila
-			echo '<div class="col-lg-6" >'; //media pagina abro
+			echo '<div class="col-lg-12" >'; //media pagina abro
 			
-						echo '<div class="col-lg-12 col-xs-12">
+						echo '<div class="col-lg-4 col-xs-12">
 				          <div class="small-box bg-yellow">
 				            <div class="inner">
 				              <h3>Crear nuevo evento</h3>
@@ -447,7 +447,7 @@ $(document).ready(function(){
 				          </div>
 				        </div>';
 				        //ver lista
-				        echo '<div class="col-lg-12 col-xs-12">
+				        echo '<div class="col-lg-4 col-xs-12">
 				          <div class="small-box bg-blue">
 				            <div class="inner">
 				              <h3>Ver lista de eventos</h3>
@@ -462,7 +462,7 @@ $(document).ready(function(){
 				        </div>';
 
 
-				        echo '<div class="col-lg-12 col-xs-12">
+				        echo '<div class="col-lg-4 col-xs-12">
 				          <div class="small-box bg-maroon">
 				            <div class="inner">
 				              <h3>Calculadora de barra libre</h3>
@@ -478,8 +478,12 @@ $(document).ready(function(){
 					
 
 			echo '</div>'; //media pagina  cierro
+			echo '</div>'; //fila   cierro
 
-        echo '<div class="col-lg-6" >'; //otra media pagina abro
+
+
+			echo '<div class="row>'; //media pagina  cierro
+        echo '<div class="col-lg-4" >'; //otra media pagina abro
 
         ?>
         	<div class="box">
@@ -546,7 +550,7 @@ $(document).ready(function(){
                 <i class="fa fa-calculator"></i> Acceder a calculadora de tu evento
               </a>';
         echo '</div>'; //otra media pagina  cierro
-
+	echo '</div>'; //media pagina  cierro
 
 		echo '</div>'; //cierro fila
 
