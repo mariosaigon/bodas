@@ -100,33 +100,33 @@ $.ajax({
 			var finalTabla="<tfoot><tr><td><b>Precio total por persona</b></td><td><b> $"+Number(precioTotal)+"</b></td></tr><tr><td style=\"text-align:center;color:blue;\"><b>Subtotal</b></td><td style=\"text-align:center;color:black;\"><b> $"+Number(precioGlobal)+"</b></td></tr></tfoot></tbody></table></div></div>"
 			textofinal=cabecita+texto+contenido+finalTabla
 			document.getElementById("tabla").innerHTML = textofinal
-			$('#data2').DataTable({
-					dom: 'Bfrtip',
-					buttons: [
-						{ extend: 'copy', text: 'Copiar' },
-						{ extend: 'csvHtml5', title: 'CSV' },
-						{ extend: 'excelHtml5', title: 'Excel' },
-						{ extend: 'pdfHtml5', title: 'PDF' },
-						{ extend: 'print', text: 'Imprimir' },
-					],
-					'language': {
-						'search': 'Buscar',
-						'emptyTable': 'Tabla vacía',
-						'info': 'Mostrando todas las bebidas que has seleccionado',
-						'infoEmpty': 'Está vacía esta tabla',
-						'infoFiltered': 'Filtrada',
-						'lengthMenu': 'Longitud',
-						'loadingRecords': 'Cargando registros',
-						'processing': 'Procesando',
-						'zeroRecords': 'Sin registros',
-						'paginate': {
-							'first': 'Primera',
-							'last': 'Última',
-							'next': 'Siguiente',
-							'previous': 'Anterior'
-						}
-					}
-				});// fin de dibujar botones
+			// $('#data2').DataTable({
+			// 		dom: 'Bfrtip',
+			// 		buttons: [
+			// 			{ extend: 'copy', text: 'Copiar' },
+			// 			{ extend: 'csvHtml5', title: 'CSV' },
+			// 			{ extend: 'excelHtml5', title: 'Excel' },
+			// 			{ extend: 'pdfHtml5', title: 'PDF' },
+			// 			{ extend: 'print', text: 'Imprimir' },
+			// 		],
+			// 		'language': {
+			// 			'search': 'Buscar',
+			// 			'emptyTable': 'Tabla vacía',
+			// 			'info': 'Mostrando todas las bebidas que has seleccionado',
+			// 			'infoEmpty': 'Está vacía esta tabla',
+			// 			'infoFiltered': 'Filtrada',
+			// 			'lengthMenu': 'Longitud',
+			// 			'loadingRecords': 'Cargando registros',
+			// 			'processing': 'Procesando',
+			// 			'zeroRecords': 'Sin registros',
+			// 			'paginate': {
+			// 				'first': 'Primera',
+			// 				'last': 'Última',
+			// 				'next': 'Siguiente',
+			// 				'previous': 'Anterior'
+			// 			}
+			// 		}
+			// 	});// fin de dibujar botones
   								
                         } // fin de success						
 						//console.log("b: "+dataf1[1])
@@ -161,7 +161,7 @@ $('input:checkbox').change( //escucho cambios de checkbox
         		//hacer cuestiones con los precios
         		//console.log("Id de la bebida seleccionado "+this.value);
         		var seleccionadas=getValueUsingParentTag();
-        		console.log("seleccionadas: "+seleccionadas);
+        		//console.log("seleccionadas: "+seleccionadas);
         		calculaPrecio(seleccionadas);
         		
 		     }// FIN DEL ELSE
