@@ -53,10 +53,11 @@ $.ajax({
                              // var sprop=datosf1[6];
                              // var splup=datosf1[7];
                             
-											
+			var nombrePersona=$("#nombrePersona").val();
+			var fecha=$("#fecha").val();								
 			var textofinal=""	
 			var cabecita='<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Resumen de tu barra libre</h3></div><div class="box-body">'				
-			var texto="<table id='data2' class=\"table table-bordered table-striped\"><thead><tr><th>Nombre de la bebida</th><th>Precio por persona</th></tr></thead><tbody>" 
+			var texto="<h5>Atención a:</h5><b>"+nombrePersona+"</b><h5>Fecha del evento :</h5>"+fecha+"<table id='data2' class=\"table table-bordered table-striped\"><thead><tr><th>Nombre de la bebida</th><th>Precio por persona</th></tr></thead><tbody>" 
 			var contenido=""
 
 			var cont=0;
@@ -89,13 +90,14 @@ $.ajax({
                              	var cuantasExtras=cont-3;
                              	var totalPenalidad=cuantasExtras*penalidad;
                              	precioTotal=precioTotal+totalPenalidad;
+                             	precioTotal=Math.round(precioTotal * 100) / 100;
 
 
                              }                             	
                           var precioGlobal=precioTotal*numInvitados;
                           precioGlobal=Math.round(precioGlobal * 100) / 100;
              //var totalito= arrayCantidades.reduce(function(a, b) { return a + b; }, 0);
-			var finalTabla="<tfoot><tr><td><b>Precio total por persona</b></td><td><b> $"+Number(precioTotal)+"</b></td></tr><tr><td style=\"text-align:center;color:blue;\"><b>Subtotal</b></td><td style=\"text-align:center;color:black;\"><b> $"+Number(precioGlobal)+"</b></td></tr></tfoot></tbody></table></div></div><p>El precio total es "+precioGlobal+"</p>"
+			var finalTabla="<tfoot><tr><td><b>Precio total por persona</b></td><td><b> $"+Number(precioTotal)+"</b></td></tr><tr><td style=\"text-align:center;color:blue;\"><b>Subtotal</b></td><td style=\"text-align:center;color:black;\"><b> $"+Number(precioGlobal)+"</b></td></tr></tfoot></tbody></table></div></div>"
 			textofinal=cabecita+texto+contenido+finalTabla
 			document.getElementById("tabla").innerHTML = textofinal
 			$('#data2').DataTable({
@@ -110,7 +112,7 @@ $.ajax({
 					'language': {
 						'search': 'Buscar',
 						'emptyTable': 'Tabla vacía',
-						'info': 'Mostrando todas las comisiones de este informe',
+						'info': 'Mostrando todas las bebidas que has seleccionado',
 						'infoEmpty': 'Está vacía esta tabla',
 						'infoFiltered': 'Filtrada',
 						'lengthMenu': 'Longitud',
@@ -173,4 +175,13 @@ $('input:checkbox').change( //escucho cambios de checkbox
         	calculaPrecio(seleccionadas);
         }	
 });
-           
+$('#btnPrint').on('click', function(){
+            var divContents = $("#imprimirEsto").html();
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>Cotización-Signature Events El Salvador. Información: info@wjproductions.co / 7749-4151</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });

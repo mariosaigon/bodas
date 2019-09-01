@@ -112,22 +112,24 @@ class SeedDMS_View_Calcula extends SeedDMS_Bootstrap_Style
 		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
 		$this->htmlAddHeader('<script type="text/javascript" src="../../styles/'.$this->theme.'/dist/adminlte/js/adminlte.min.js"></script>');
 		$this->htmlAddHeader('<script type="text/javascript" src="../../styles/'.$this->theme.'/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>');
-		$this->htmlAddHeader(
-			'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>'."\n".
-			'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>'."\n".
-			'<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>'."\n".
-			'<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>'."\n".
-			'<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>'."\n".
-			'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>'."\n".
-			'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>'."\n".
-			'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>'."\n".
-			'<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>'."\n".
-			'<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>'."\n".
+		$this->htmlAddHeader('<link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet">'."\n", 'css');
+		$this->htmlAddHeader('<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">'."\n", 'css');
+		// $this->htmlAddHeader(
+		// 	'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>'."\n".
+		// 	'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>'."\n".
+		// 	'<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>'."\n".
+		// 	'<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>'."\n".
+		// 	'<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>'."\n".
+		// 	'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>'."\n".
+		// 	'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>'."\n".
+		// 	'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>'."\n".
+		// 	'<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>'."\n".
+		// 	'<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>'."\n".
 			
-			'<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>'."\n".
-			'<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>'."\n".
-			'<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />'."\n"
-			);
+		// 	'<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>'."\n".
+		// 	'<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>'."\n".
+		// 	'<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />'."\n"
+		// 	);
 		$this->htmlStartPage("Cotiza tu barra libre", "skin-blue sidebar-mini sidebar-collapse");
 		$this->containerStart();
 		$this->mainHeader();
@@ -161,10 +163,23 @@ $this->contentContainerStart();
                 
                 
               </div>
+              <div id="contenedorNombre" class="form-group ">
+                  <label class="control-label" for="nombrePersona"><i class="fa fa-user"></i> Tu nombre: </label>
+                 <input type="text" id="nombrePersona" name="nombrePersona" class="form-control" placeholder="Indica tu nombre..">
+                  
+                </div>
+
+
+                <div id="contenedorFecha" class="form-group ">
+                  <label class="control-label" for="contenedorFecha"><i class="fa fa-calendar"></i> Fecha de tu evento: </label>
+                 <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Indica tu nombre..">
+                  
+                </div>
+
 
 
               <div id="contenedorInvitados" class="form-group ">
-                  <label class="control-label" for="inputInvis"><i class="fa fa-user"></i> Cantidad de invitados a tu evento</label>
+                  <label class="control-label" for="inputInvis"><i class="fa fa-users"></i> Cantidad de invitados a tu evento</label>
                  <input type="number" id="cantidadInvitados" name="cantidadInvitados" class="form-control" placeholder="Indique una cantidad...">
                   
                 </div>
@@ -310,8 +325,9 @@ $this->contentContainerStart();
           <!-- /.box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-4">
+        <div id="imprimirEsto" class="col-md-4">
         			<div id="tabla"></div>
+        			<input type="button" value="Imprimir" id="btnPrint" />
        
         </div>
         <!-- /.col -->

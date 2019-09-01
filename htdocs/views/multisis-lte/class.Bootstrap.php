@@ -59,10 +59,10 @@ class SeedDMS_Bootstrap_Style extends SeedDMS_View_Common {
 			 * X-Content-Security-Policy is deprecated, Firefox understands
 			 * Content-Security-Policy since version 23+
 			 */
-			$csp_rules = "script-src 'self' 'unsafe-eval';"; // style-src 'self';";
-			foreach (array("X-WebKit-CSP", "X-Content-Security-Policy", "Content-Security-Policy") as $csp) {
-				header($csp . ": " . $csp_rules);
-			}
+			// $csp_rules = "script-src 'self' 'unsafe-eval';"; // style-src 'self';";
+			// foreach (array("X-WebKit-CSP", "X-Content-Security-Policy", "Content-Security-Policy") as $csp) {
+			// 	header($csp . ": " . $csp_rules);
+			// }
 		}
 
 		echo "<!DOCTYPE html>\n";
